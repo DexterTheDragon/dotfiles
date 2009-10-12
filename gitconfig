@@ -1,0 +1,9 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	excludesfile = /home/kevin/.gitexcludes
+[user]
+	email = cartkev@gmail.com
+	name = Kevin Carter

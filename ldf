@@ -1,0 +1,131 @@
+#!/bin/sh
+# a shell script to manage linking rc files in a directory to your home dir
+
+doLink() {
+    if [ -n "$1" ]; then
+        files=$1
+    fi
+    if [ -z "$files" ]; then
+        files=`ls $LINKFROM | grep -v $ME`
+    fi
+    for i in $files; do
+        i=`basename $i | sed 's/^\.//g'`
+        file=".$i"
+        if [ -h "$LINKTO/$file" ]; then
+            echo "$file: already a symlink"
+            continue
+        elif [ -f "$LINKTO/$file" -o -d "$LINKTO/$file" ]; then
+            echo "$file: file exists"
+            continue
+        else
+            echo "Linking $file"
+            cd $LINKTO
+            ln -s "$LINKFROM/$i" $file
+            cd - > /dev/null
+        fi
+    done
+}
+
+doUnlink() {
+    if [ -z "$files" ]; then
+        files=`find $LINKTO -maxdepth 1 -type l -name '.*'`
+    fi
+    for i in $files; do
+        file=`basename $i | sed 's/^\.//g'`
+        file="$LINKTO/.$file"
+        if [ ! -h "$file" ]; then
+            echo "$file is not a link" >&2; exit 3
+        fi
+        linkfile=`readlink -m $file`
+        if [ `expr match $linkfile $LINKTO` -gt 0 ]; then
+            echo "removing $file"
+            rm $file
+        fi
+    done
+}
+
+doInstall() {
+    if [ ! -e $1 ]; then
+        echo "$1 does not exist" >&2; exit 2
+    fi
+    if [ ! -w $1 ]; then
+        echo "$1 is not writeable" >&2; exit 2
+    fi
+    if [ ! -w $LINKFROM ]; then
+        echo "$LINKFROM is not writeable" >&2; exit 2
+    fi
+
+    newname=`basename $1 | sed 's/^\.//g'`
+    echo "mv $1 $LINKFROM/$newname"
+    mv $1 "$LINKFROM/$newname"
+    doLink $newname
+}
+
+usage() {
+    printf "Usage: %s [OPTION] [files]\n" $(basename $0) >&2
+    echo "Manage symlinks to rc files in a directory to your home directory\n" >&2
+    echo "  -u [files]\t Unlink files. If list of files is given will " >&2
+    echo "\t\t unlink those, otherwise it will unlink all" >&2
+    echo "  -i file\t Move file into dotfiles directory and link it" >&2
+    echo "  -t dir\t Directory to link files into. Default: home dir" >&2
+    printf "  -f dir\t Directory to link files from. Default: directory %s is in\n" $(basename $0) >&2
+    exit 2
+}
+
+setTo() {
+    if [ -n "$1" ]; then
+        LINKTO=$1
+    else
+        LINKTO=$HOME
+    fi
+    if [ ! -d $LINKTO ]; then
+        echo "$LINKTO is not a directory" >&2; exit 2
+    fi
+    if [ ! -w $LINKTO ]; then
+        echo "$LINKTO is not writeable" >&2; exit 2
+    fi
+}
+
+setFrom() {
+    if [ -n "$1" ]; then
+        LINKFROM=$LINKFROM
+    else
+        LINKFROM=`dirname $SCRIPT`
+        if [ -z "`echo $LINKFROM | grep '^/'`" ]; then
+           LINKFROM="`pwd`/$LINKFROM"
+        fi
+        LINKFROM=`readlink -m $LINKFROM`
+    fi
+    if [ ! -d $LINKFROM ]; then
+        echo "$LINKFROM is not a directory" >&2; exit 2
+    fi
+    if [ ! -r $LINKFROM ]; then
+        echo "$LINKFROM is not readable" >&2; exit 2
+    fi
+}
+
+ME=`basename $0`
+SCRIPT=$0
+
+action='link';
+while getopts 'hui:t:f:' OPTION
+do
+    case $OPTION in
+    t) LINKTO=$OPTARG ;;
+    f) LINKFROM=$OPTARG;;
+    u) action='unlink';;
+    i) action='install'; file=$OPTARG ;;
+    h | ?) usage ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+setTo $LINKTO
+setFrom $LINKFROM
+files=$*
+
+case $action in
+    'link') doLink ;;
+    'unlink') doUnlink ;;
+    'install') doInstall $file;;
+esac

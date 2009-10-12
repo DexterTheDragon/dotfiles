@@ -1,0 +1,13 @@
+.d3lphinview
+*.o
+*.lo
+*.la
+*.kpf
+#*#
+.*.rej
+*.rej
+.*~
+*~
+.#*
+.DS_Store
+.svn
