@@ -1,18 +1,22 @@
-# $Id: .screenrc 181 2008-04-02 08:06:27Z shouse $
-#
-#                               MESSAGES
+# ------------------------------------------------------------------------------
+#                                  MESSAGES
+# ------------------------------------------------------------------------------
 nethack on              # be careful! new screen tonight.
 sorendition "kg"        # makes screen messages stand out, black on green
 msgwait 2               # default display wait is way too long
 startup_message off     # boooring!
 version                 # echo version on startup, 'cause old versions break things
 
-#                                 MISC
+# ------------------------------------------------------------------------------
+#                                    MISC
+# ------------------------------------------------------------------------------
 autodetach on           # *sniff* I love this so much!
 defflow off             # disables (in theory) flow control ('cause it's no longer 1983)
 bind s
 vbell off               # visual bells suck
 defutf8 on              # Default to utf
+escape ^Ss              # Change the escape key to C-s so I can use C-a in vim
+altscreen on            # Redraw the screen after exiting fullscreen apps like vim
 
 #                           SCROLL-BACK MODE
 ignorecase on           # case insensitive search in scroll-back mode
@@ -28,7 +32,9 @@ bufferfile $HOME/.screen_buf
 # Reads the current X selection into the paste buffer
 # bindkey < eval "stuff ' '" "exec sh -c 'xclip -o > /tmp/screen-exchange'" readbuf
 
-#                           DEFAULT WINDOWS
+# ------------------------------------------------------------------------------
+#                               DEFAULT WINDOWS
+# ------------------------------------------------------------------------------
 screen -t irssi
 screen -t rtorrent
 screen -t tircd
@@ -36,7 +42,9 @@ screen -t main
 select 0
 monitor on # monitor the irssi window by default
 
-#                            NESTED SCREENS
+# ------------------------------------------------------------------------------
+#                               NESTED SCREENS
+# ------------------------------------------------------------------------------
 # I often run an ssh-ed screen in my main screen and like ctrl-s for the inside escape key.
 # You need to free it from legacy silliness first though. Put this in your .bashrc
 # tty > /dev/null && stty -ixon -ixoff
@@ -46,7 +54,9 @@ monitor on # monitor the irssi window by default
 # Then uncomment the following line in the remote .screenrc or invoke with screen -e'^Ss'
 # escape ^Ss
 
-#                               HARDSTATUS
+# ------------------------------------------------------------------------------
+#                                 HARDSTATUS
+# ------------------------------------------------------------------------------
 # Adds a nice "tabbed" look, kinda long but gracefully pushes the status stuff off-screen if need be
 # hardstatus alwayslastline "%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %= %{mk}@ %H %{ck}%Y%{wk}-%{ck}%m%{wk}-%{ck}%d %{yk}%D %{gk}%0c %{bk}%l"
 hardstatus alwayslastline "%{wk}%?%-Lw%?%{=b kR}[%{W}%n%f %t%?(%u)%?%{=b kR}]%{= kw}%?%+Lw%?%?%= %{G}[%H]%{Y}[%l]%{C}[%D %m/%d/%Y %C%a]"
@@ -56,10 +66,9 @@ hardstatus alwayslastline "%{wk}%?%-Lw%?%{=b kR}[%{W}%n%f %t%?(%u)%?%{=b kR}]%{=
 
 # EOF
 
-###############
+# ------------------------------------------------------------------------------
 # 256 colours #
-###############
-#
+# ------------------------------------------------------------------------------
 #.. __: http://frexx.de/xterm-256-notes/
 #
 
@@ -70,4 +79,3 @@ hardstatus alwayslastline "%{wk}%?%-Lw%?%{=b kR}[%{W}%n%f %t%?(%u)%?%{=b kR}]%{=
 # termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # erase background with current bg color
 # defbce "on"
-
