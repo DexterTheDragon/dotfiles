@@ -1,6 +1,8 @@
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
-IRB.conf[:PROMPT_MODE] = :CLASSIC
+if IRB.conf[:PROMPT].include? :RVM
+  IRB.conf[:PROMPT_MODE] = :RVM
+end
 
 begin
   require 'rubygems'
@@ -46,6 +48,7 @@ if ENV.include?('RAILS_ENV')
     :PROMPT_I => "#{rails_root}> ",
     :PROMPT_S => "#{rails_root}%l ",
     :PROMPT_C => "#{rails_root}? ",
+    :PROMPT_N => "#{rails_root}? ",
     :RETURN   => "=> %s\n"
   }
   IRB.conf[:PROMPT_MODE] = :RAILS
@@ -57,3 +60,6 @@ if ENV.include?('RAILS_ENV')
     ActiveRecord::Base.instance_eval { alias :[] :find }
   end
 end
+
+## Notify us of the version and that it is ready.
+puts "Ruby #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL} (#{RUBY_RELEASE_DATE}) #{RUBY_PLATFORM}"
