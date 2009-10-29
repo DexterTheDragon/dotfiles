@@ -443,6 +443,7 @@ nmap K :Man <C-R>=expand("<cword>")<CR><CR>
 
 " }}}
 let php_folding=1
+let g:rails_statusline=0
 
 " Quit using arrow keys!
 "map <Up> :q<CR>
@@ -458,6 +459,7 @@ vmap <S-Tab> <
 
 
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
+set tabpagemax=30
 
 " eof
 " vim:ft=vim:fdm=marker:ff=unix:nowrap:tabstop=4:shiftwidth=4:softtabstop=4:smarttab:shiftround:expandtab
