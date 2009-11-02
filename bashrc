@@ -61,6 +61,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.environment ]; then
+    . ~/.environment
+fi
+
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
@@ -80,9 +84,6 @@ fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-
-export EDITOR=vim
-export PATH=~/bin/:/opt/komodo/:~/dev/cakephp/cake/console/:/var/lib/gems/1.8/bin/:$PATH
 
 # list contents right after changing directories
 cd() {
