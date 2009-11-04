@@ -1,0 +1,14 @@
+# Always sort the files
+--sort-files
+
+# Always color, even if piping to a another program
+# --color
+
+# Use "less -r" as my pager
+--pager=less -r
+
+# Add file types
+--type-add
+ruby=.haml
+--type-add
+php=.ctp
