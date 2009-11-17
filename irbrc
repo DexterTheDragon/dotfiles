@@ -39,6 +39,23 @@ rescue LoadError => err
   warn "Couldn't load Wirble: #{err}"
 end
 
+begin
+  require 'looksee/shortcuts'
+  module Kernel
+    alias_method :orig_methods, :methods
+
+    def methods(*args)
+      if caller.first =~ /\(irb\):\d+:in `irb_binding'/
+        lp(self, *args)
+      else
+        orig_methods
+      end
+    end
+  end
+rescue LoadError => err
+  warn "Couldn't load looksee: #{err}"
+end
+
 class Object
   def method_like(regex)
     pp methods.select {|m| m =~ regex}
