@@ -461,5 +461,30 @@ vmap <S-Tab> <
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 set tabpagemax=30
 
+" Unobtrusive highlighting of trailing whitespace
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=red
+" au ColorScheme * highlight ExtraWhitespace guibg=red
+" au BufEnter * match ExtraWhitespace /\s\+$/
+" au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" au InsertLeave * match ExtraWhiteSpace /\s\+$/
+
+" this is better than the highlighting
+" set listchars=tab:▷⋅,trail:⋅,nbsp:⋅ " stupid triangle with this font
+set listchars=tab:>-,trail:⋅,nbsp:⋅
+au BufEnter * set list
+au InsertEnter * set nolist
+au InsertLeave * set list
+
+" toggle line numbers and fold column w00t!
+map <silent> <F7> :if &number <Bar>
+    \set nonumber <Bar>
+    \set foldcolumn=0 <Bar>
+        \else <Bar>
+    \set number <Bar>
+    \set foldcolumn=4 <Bar>
+        \endif<cr>
+
+
+
 " eof
 " vim:ft=vim:fdm=marker:ff=unix:nowrap:tabstop=4:shiftwidth=4:softtabstop=4:smarttab:shiftround:expandtab
