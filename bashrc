@@ -57,14 +57,6 @@ esac
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/.environment ]; then
-    . ~/.environment
-fi
-
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
@@ -85,13 +77,29 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# list contents right after changing directories
-cd() {
-    if [ "$1" ]
-    then builtin cd "$1" && ls
-    else builtin cd && ls
-    fi
-}
+# vi baby
+set -o vi
+# ^p check for partial match in history
+bind -m vi-insert "\C-p":dynamic-complete-history
+
+# ^n cycle through the list of partial matches
+bind -m vi-insert "\C-n":menu-complete
+
+# ^l clear screen
+bind -m vi-insert "\C-l":clear-screen
+
+# source various files
+if [ -f ~/.environment ]; then
+    . ~/.environment
+fi
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
 
 if [ -f ~/.dir_colors ]; then
     eval `dircolors ~/.dir_colors`

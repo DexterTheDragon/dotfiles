@@ -26,3 +26,4 @@ alias svnvimdiff='svn diff --diff-cmd svnvimdiff'
 alias ink='sudo ink -p usb'
 alias c++_strict='c++ -ansi -pedantic -Wall'
 alias rmpyc='find . -name "*.pyc" -delete'
+# vim:ft=sh
