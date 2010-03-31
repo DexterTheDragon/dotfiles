@@ -10,6 +10,17 @@ require 'autotest/timestamp'
 # Autotest::AutoUpdate.update_cmd = o
 # Autotest::RCov.command = o
 # Autotest::RCov.pattern = o
+
+# Clear the screen before each run. This way, it's visually easier to parse the
+# test output, and I don't have to bend my neck so much.
+#
+# http://en.wikipedia.org/wiki/ANSI_escape_code#Codes
+# \e[2J clears the entire screen
+# \e[H positions the cursor at 1,1
+Autotest.add_hook(:run_command) do
+  $stdout.write "\e[2J\e[H"
+end
+
 module Autotest::KDENotify
   def self.knotify title, msg
     system "kdialog --title \'#{title}\' --passivepopup \'#{msg}\' 5"
