@@ -10,5 +10,6 @@ let tlist_xhtml_settings = tlist_xml_settings
 let tlist_html_settings = tlist_xml_settings
 let tlist_htmldjango_settings = tlist_xml_settings
 let tlist_css_settings = 'css;s:Selectors'
+let tlist_php_settings = 'php;c:class;d:constant;f:function'
 let Tlist_Exit_OnlyWindow = 1
 " let Tlist_GainFocus_On_ToggleOpen = 1
