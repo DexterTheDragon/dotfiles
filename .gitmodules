@@ -1,0 +1,12 @@
+[submodule "vim/external/nerdtree"]
+	path = vim/external/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
+[submodule "vim/external/vim-rails"]
+	path = vim/external/vim-rails
+	url = git://github.com/tpope/vim-rails.git
+[submodule "vim/external/vim-surround"]
+	path = vim/external/vim-surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule "vim/external/vim-cucumber"]
+	path = vim/external/vim-cucumber
+	url = git://github.com/tpope/vim-cucumber.git
