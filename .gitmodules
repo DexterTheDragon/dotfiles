@@ -10,3 +10,6 @@
 [submodule "vim/external/vim-cucumber"]
 	path = vim/external/vim-cucumber
 	url = git://github.com/tpope/vim-cucumber.git
+[submodule "vim/external/vim-endwise"]
+	path = vim/external/vim-endwise
+	url = git://github.com/tpope/vim-endwise.git
