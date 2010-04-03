@@ -19,3 +19,6 @@
 [submodule "vim/external/snipmate.vim"]
 	path = vim/external/snipmate.vim
 	url = git://github.com/msanders/snipmate.vim.git
+[submodule "vim/external/nerdcommenter"]
+	path = vim/external/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
