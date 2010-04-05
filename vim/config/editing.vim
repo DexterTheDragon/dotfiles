@@ -52,3 +52,24 @@ au InsertLeave * set list
 
 
 " }}}
+" Multi-buffer/window/tab editing {{{
+
+set switchbuf=useopen           "swb:   Jumps to first window or tab that contains specified buffer instead of duplicating an open window
+set showtabline=1               "stal:  Display the tabbar if there are multiple tabs. Use :tab ball or invoke Vim with -p
+" set hidden                      "hid:   allows opening a new buffer in place of an existing one without first saving the existing one
+
+set splitright                  "spr:   puts new vsplit windows to the right of the current
+set splitbelow                  "sb:    puts new split windows to the bottom of the current
+
+set winminheight=0              "wmh:   the minimal line height of any non-current window
+set winminwidth=0               "wmw:   the minimal column width of any non-current window
+
+
+" When restoring a hidden buffer Vim doesn't always keep the same view (like
+" when your view shows beyond the end of the file). (Vim tip 1375)
+if v:version >= 700
+    au BufLeave * let b:winview = winsaveview()
+    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+endif
+
+" }}}

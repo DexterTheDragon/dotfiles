@@ -1,50 +1,6 @@
-" Author: Seth House <seth@eseth.com>
-" Version: $LastChangedRevision: 201 $  (Last non-version-controlled release: 1.1.2)
-" Modified: $LastChangedDate: 2008-04-27 18:33:16 -0600 (Sun, 27 Apr 2008) $
-" Revamped for Vim 7 - will output a few non-critical errors for old versions.
-" For more information type :help followed by the command.
 
 set nocompatible                "cp:    turns off strct vi compatibility
-
-" Multi-buffer/window/tab editing {{{
-
-set switchbuf=useopen           "swb:   Jumps to first window or tab that contains specified buffer instead of duplicating an open window
-set showtabline=1               "stal:  Display the tabbar if there are multiple tabs. Use :tab ball or invoke Vim with -p
-" set hidden                      "hid:   allows opening a new buffer in place of an existing one without first saving the existing one
-
-set splitright                  "spr:   puts new vsplit windows to the right of the current
-set splitbelow                  "sb:    puts new split windows to the bottom of the current
-
-set winminheight=0              "wmh:   the minimal line height of any non-current window
-set winminwidth=0               "wmw:   the minimal column width of any non-current window
-
-" Type <F1> follwed by a buffer number or name fragment to jump to it.
-" Also replaces the annoying help button. Based on tip 821.
-map <F1> :ls<CR>:b<Space>
-
-" Earlier Vims did not support tabs. Below is a vertical-tab-like cludge. Use
-" :ball or invoke Vim with -o (Vim tip 173)
-if version < 700
-    " ctrl-j,k will move up or down between split windows and maximize the
-    " current window
-    nmap <C-J> <C-W>j<C-W>_
-    nmap <C-K> <C-W>k<C-W>_
-else
-    " same thing without the maximization to easily move between split windows
-    nmap <C-J> <C-W>j
-    nmap <C-K> <C-W>k
-    nmap <C-H> <C-W>h
-    nmap <C-L> <C-W>l
-endif
-
-" When restoring a hidden buffer Vim doesn't always keep the same view (like
-" when your view shows beyond the end of the file). (Vim tip 1375)
-if v:version >= 700
-    au BufLeave * let b:winview = winsaveview()
-    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-endif
-
-" }}}
+filetype plugin indent on
 
 " MyTabLine {{{
 " This is an attempt to emulate the default Vim-7 tabs as closely as possible but with numbered tabs.
@@ -97,17 +53,11 @@ autocmd BufReadPost *
     \   exe "normal g`\"" |
     \ endif
 
-" Auto-set certain options as well as syntax highlighting and indentation
-filetype plugin indent on
-
 " Not sure why the cron filetype isn't catching this...
 au FileType crontab set backupcopy=yes
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
-
-au! BufNewFile,BufRead *.thtml setfiletype php
-au! BufNewFile,BufRead *.ctp setfiletype php
 
 " Enables :make to compile, or validate, certain filetypes
 " (use :cn & :cp to jump between errors)
@@ -124,12 +74,6 @@ autocmd FileChangedShell *
     \ echohl WarningMsg |
     \ echo "File has been changed outside of vim." |
     \ echohl None
-
-" Vim Help docs: hit enter to activate links, and ctrl-[ as a back button
-"au FileType help nmap <buffer> <Return> <C-]>
-"au FileType help nmap <buffer> <C-[> <C-O>
-
-
 
 
 " Makes the current buffer a scratch buffer
@@ -149,29 +93,13 @@ function! WarnTabs()
 endfunction
 autocmd BufReadPost * call WarnTabs()
 
-
-" Open a man-page in a new window
-runtime ftplugin/man.vim
-nmap K :Man <C-R>=expand("<cword>")<CR><CR>
-
 " }}}
 
-
-
+" load everything else in its own config file
 runtime! config/**/*
 
-
-
-let php_folding=1
+let ruby_fold=1
 let g:rails_statusline=0
-
-
-
-autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
-
-
-
-
 
 " eof
 " vim:ft=vim:fdm=marker:ff=unix:nowrap:tabstop=4:shiftwidth=4:softtabstop=4:smarttab:shiftround:expandtab

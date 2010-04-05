@@ -1,6 +1,10 @@
 " Fix for legacy vi inconsistency
 map Y y$
 
+" Type <F1> follwed by a buffer number or name fragment to jump to it.
+" Also replaces the annoying help button. Based on tip 821.
+map <F1> :ls<CR>:b<Space>
+
 " A shortcut to show the numbered register contents
 map <F2> :reg "0123456789-*+:/<CR>
 
@@ -18,6 +22,20 @@ nmap <silent> <C-P> :set nowrap!<CR>:set nowrap?<CR>
 noremap <silent> ,sq :new +:read\ !svn\ diff\ #<CR>:exe Scratch()<CR>:set filetype=diff<CR>:set nofoldenable<CR>
 " Big, slow, fancy, tabbed vimdiff. When you're done just :tabclose the tab.
 noremap <silent> ,sd :tabnew %<CR> :vnew +:read\ !svn\ cat\ #<CR>:exe Scratch()<CR>:diffthis<CR><C-W>w :diffthis<CR>:set syntax=off<CR>
+
+" Open a man-page in a new window
+runtime ftplugin/man.vim
+nmap K :Man <C-R>=expand("<cword>")<CR><CR>
+
+" Vim Help docs: hit enter to activate links, and ctrl-[ as a back button
+au FileType help nmap <buffer> <Return> <C-]>
+au FileType help nmap <buffer> <C-[> <C-O>
+
+" ctrl-h,j,k,l will move between split windows
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
+nmap <C-H> <C-W>h
+nmap <C-L> <C-W>l
 
 
 " Quit using arrow keys!
