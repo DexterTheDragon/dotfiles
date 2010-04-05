@@ -27,9 +27,9 @@ noremap <silent> ,sd :tabnew %<CR> :vnew +:read\ !svn\ cat\ #<CR>:exe Scratch()<
 runtime ftplugin/man.vim
 nmap K :Man <C-R>=expand("<cword>")<CR><CR>
 
-" Vim Help docs: hit enter to activate links, and ctrl-[ as a back button
+" Vim Help docs: hit enter to activate links, and backspace as a back button
 au FileType help nmap <buffer> <Return> <C-]>
-au FileType help nmap <buffer> <C-[> <C-O>
+au FileType help nmap <buffer> <BS> <C-o>
 
 " ctrl-h,j,k,l will move between split windows
 nmap <C-J> <C-W>j
