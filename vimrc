@@ -46,32 +46,6 @@ endif
 
 " }}}
 
-" YankList {{{1
-" NOTE: work in progress
-
-noremap <silent> gy :set opfunc=YankList<CR>g@
-vmap <silent> gy :<C-U>call YankList(visualmode(), 1)<CR>
-map <silent> gyy Y
-
-function! YankList(type, ...)
-    let sel_save = &selection
-    let &selection = "inclusive"
-    let reg_save = @@
-
-    echo "Something was copied!\n"
-
-    if a:0  " Invoked from Visual mode, use '< and '> marks.
-        silent exe "normal! `<" . a:type . "`>y"
-    elseif a:type == 'line' " Line
-        silent exe "normal! '[V']y"
-    elseif a:type == 'block' " Block
-        silent exe "normal! `[\<C-V>`]y"
-    else " ???
-        silent exe "normal! `[v`]y"
-    endif
-endfunction
-
-" }}}
 " MyTabLine {{{
 " This is an attempt to emulate the default Vim-7 tabs as closely as possible but with numbered tabs.
 
