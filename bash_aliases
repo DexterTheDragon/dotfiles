@@ -31,4 +31,6 @@ alias rmpyc='find . -name "*.pyc" -delete'
 
 alias podcatcher='podcatcher --options ~/.podcatcher.yaml'
 
+alias beb='bundle exec bash && echo "Exiting bundle exec"'
+
 # vim:ft=sh
