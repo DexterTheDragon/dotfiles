@@ -6,6 +6,8 @@ alias l='ls -CF'
 alias vim='vim -p'
 alias vi='vim'
 
+alias o='xdg-open'
+
 alias wget='wget -c'
 
 alias less='less -imJMW'
@@ -26,4 +28,7 @@ alias svnvimdiff='svn diff --diff-cmd svnvimdiff'
 alias ink='sudo ink -p usb'
 alias c++_strict='c++ -ansi -pedantic -Wall'
 alias rmpyc='find . -name "*.pyc" -delete'
+
+alias podcatcher='podcatcher --options ~/.podcatcher.yaml'
+
 # vim:ft=sh
