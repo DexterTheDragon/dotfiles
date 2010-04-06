@@ -98,7 +98,6 @@ autocmd BufReadPost * call WarnTabs()
 " load everything else in its own config file
 runtime! config/**/*
 
-let ruby_fold=1
 let g:rails_statusline=0
 
 " eof
