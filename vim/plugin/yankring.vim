@@ -1,0 +1,1 @@
+../external/yankring/plugin/yankring.vim

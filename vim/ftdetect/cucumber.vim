@@ -1,2 +1,1 @@
-" Cucumber
-autocmd BufNewFile,BufReadPost *.feature,*.story set filetype=cucumber
+../external/vim-cucumber/ftdetect/cucumber.vim

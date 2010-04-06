@@ -1,0 +1,1 @@
+../external/vim-git/syntax/gitconfig.vim
