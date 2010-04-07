@@ -4,6 +4,7 @@ if [ -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
 else
     export TERM='xterm-color'
+    echo 'WARNING: 256 color support is not enabled'
 fi
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
