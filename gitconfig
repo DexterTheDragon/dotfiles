@@ -1,11 +1,11 @@
-[color]
-	diff = auto
-	status = auto
-	branch = auto
-[core]
-	excludesfile = /home/kevin/.gitexcludes
 [user]
-	email = cartkev@gmail.com
-	name = Kevin Carter
+    email = cartkev@gmail.com
+    name = Kevin Carter
+[core]
+    excludesfile = ~/.gitexcludes
+[color]
+    diff = auto
+    status = auto
+    branch = auto
 [alias]
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset (%aN <%aE>)' --abbrev-commit --date=relative
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset (%aN <%aE>)' --abbrev-commit --date=relative

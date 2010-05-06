@@ -36,6 +36,10 @@ begin
     }
   end
 rescue LoadError => err
+  require 'pp'
+  require 'irb/completion'
+  require 'irb/ext/save-history'
+  IRB.conf[:SAVE_HISTORY] = 100
   warn "Couldn't load Wirble: #{err}"
 end
 
