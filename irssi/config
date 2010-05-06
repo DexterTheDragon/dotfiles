@@ -1,0 +1,441 @@
+servers = (
+  {
+    address = "irc.freenode.net";
+    chatnet = "freenode";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "localhost";
+    chatnet = "bitlbee";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "localhost";
+    chatnet = "twitter";
+    port = "6668";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  freenode = { type = "IRC"; };
+  twitter = { type = "IRC"; };
+  bitlbee = {
+    type = "IRC";
+    autosendcmd = "wait 2000; /msg &bitlbee identify 9173";
+  };
+};
+
+channels = (
+  { name = "#oalug"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#uphpu"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#urug"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#utahpython"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#udbug"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#utos"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#hackutos"; chatnet = "freenode"; autojoin = "yes"; },
+  {
+    name = "#eventrevolution";
+    chatnet = "freenode";
+    autojoin = "yes";
+  }
+);
+
+aliases = {
+  J = "join";
+  WJOIN = "join -window";
+  WQUERY = "query -window";
+  LEAVE = "part";
+  BYE = "quit";
+  EXIT = "quit";
+  SIGNOFF = "quit";
+  DESCRIBE = "action";
+  DATE = "time";
+  HOST = "userhost";
+  LAST = "lastlog";
+  SAY = "msg *";
+  WI = "whois";
+  WII = "whois $0 $0";
+  WW = "whowas";
+  W = "who";
+  N = "names";
+  M = "msg";
+  T = "topic";
+  C = "clear";
+  CL = "clear";
+  K = "kick";
+  KB = "kickban";
+  KN = "knockout";
+  BANS = "ban";
+  B = "ban";
+  MUB = "unban *";
+  UB = "unban";
+  IG = "ignore";
+  UNIG = "unignore";
+  SB = "scrollback";
+  UMODE = "mode $N";
+  WC = "window close";
+  WN = "window new hide";
+  SV = "say Irssi $J ($V) - http://irssi.org/";
+  GOTO = "sb goto";
+  CHAT = "dcc chat";
+  RUN = "SCRIPT LOAD";
+  UPTIME = "eval exec - expr `date +%s` - \\$F | awk '{print \"Irssi uptime: \"int(\\\\\\$1/3600/24)\"d \"int(\\\\\\$1/3600%24)\"h \"int(\\\\\\$1/60%60)\"m \"int(\\\\\\$1%60)\"s\" }'";
+  CALC = "exec - if which bc &>/dev/null\\; then echo '$*' | bc | awk '{print \"$*=\"$$1}'\\; else echo bc was not found\\; fi";
+  SBAR = "STATUSBAR";
+  INVITELIST = "mode $C +I";
+  Q = "QUERY";
+  "MANUAL-WINDOWS" = "set use_status_window off;set autocreate_windows off;set autocreate_query_level none;set autoclose_windows off;set reuse_unused_windows on;save";
+  EXEMPTLIST = "mode $C +e";
+  ATAG = "WINDOW SERVER";
+  NS = "/msg nickserv";
+  NSIDENTIFY = "/msg nickserv identify $0";
+  NSGHOST = "/msg nickserv ghost $0 $1";
+  NSRECOVER = "/msg nickserv recover $0 $1";
+  NSRELEASE = "/msg nickserv release $0 $1";
+  NSINFO = "/msg nickserv info $0";
+  NSLINK = "/msg nickserv link $0 $1";
+};
+
+statusbar = {
+  # formats:
+  # when using {templates}, the template is shown only if it's argument isn't
+  # empty unless no argument is given. for example {sb} is printed always,
+  # but {sb $T} is printed only if $T isn't empty.
+
+  items = {
+    # start/end text in statusbars
+    barstart = "{sbstart}";
+    barend = "{sbend}";
+
+    topicbarstart = "{topicsbstart}";
+    topicbarend = "{topicsbend}";
+
+    # treated "normally", you could change the time/user name to whatever
+    time = "{sb $Z}";
+    user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
+
+    # treated specially .. window is printed with non-empty windows,
+    # window_empty is printed with empty windows
+    window = "{sb $winref:$itemname{sbmode $M}}";
+    window_empty = "{sb $winref{sbservertag $tag}}";
+    prompt = "{prompt $[.15]itemname}";
+    prompt_empty = "{prompt $winname}";
+    topic = " $topic";
+    topic_empty = " Irssi v$J - http://irssi.org/help/";
+
+    # all of these treated specially, they're only displayed when needed
+    lag = "{sb Lag: $0-}";
+    act = "{sb Act: $0-}";
+    more = "-- more --";
+  };
+
+  # there's two type of statusbars. root statusbars are either at the top
+  # of the screen or at the bottom of the screen. window statusbars are at
+  # the top/bottom of each split window in screen.
+  default = {
+    # the "default statusbar" to be displayed at the bottom of the window.
+    # contains all the normal items.
+    window = {
+      disabled = "no";
+
+      # window, root
+      type = "window";
+      # top, bottom
+      placement = "bottom";
+      # number
+      position = "1";
+      # active, inactive, always
+      visible = "active";
+
+      # list of items in statusbar in the display order
+      items = {
+        barstart = { priority = "100"; };
+        time = { };
+        user = { };
+        "awaylogcnt'" = { priority = "1"; };
+        window = { };
+        window_empty = { };
+        lag = { priority = "-1"; };
+        act = { priority = "10"; };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+        inputlength = { alignment = "right"; };
+      };
+    };
+
+    # statusbar to use in inactive split windows
+    window_inact = {
+      type = "window";
+      placement = "bottom";
+      position = "1";
+      visible = "inactive";
+      items = {
+        barstart = { priority = "100"; };
+        window = { };
+        window_empty = { };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+
+    # we treat input line as yet another statusbar :) It's possible to
+    # add other items before or after the input line item.
+    prompt = {
+      type = "root";
+      placement = "bottom";
+      # we want to be at the bottom always
+      position = "100";
+      visible = "always";
+      items = {
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
+        # treated specially, this is the real input line.
+        input = { priority = "10"; };
+      };
+    };
+
+    # topicbar
+    topic = {
+      type = "root";
+      placement = "top";
+      position = "1";
+      visible = "always";
+      items = {
+        topicbarstart = { priority = "100"; };
+        topic = { };
+        topic_empty = { };
+        topicbarend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    add = { disabled = "yes"; };
+    remove = { items = { }; disabled = "yes"; };
+  };
+};
+settings = {
+  core = {
+    real_name = "Kevin";
+    user_name = "admin";
+    nick = "DexterTheDragon";
+    log_create_mode = "644";
+    log_open_string = "";
+    log_close_string = "";
+  };
+  "perl/core/scripts" = {
+    nicklist_width = "15";
+    trackbar_style = "%g";
+    screen_away_message = "went away....";
+    screen_away_nick = " ";
+    nicklist_automode = "screen";
+  };
+  "fe-common/core" = {
+    autolog = "yes";
+    autolog_path = "~/irclogs/%Y/$tag/$0/$0.%m-%d.log";
+    theme = "88_madcows";
+    windows_auto_renumber = "no";
+    hilight_color = "%g";
+    hilight_act_color = "%R";
+  };
+  "fe-text" = { actlist_sort = "refnum"; };
+};
+ignores = (
+  { level = "JOINS PARTS QUITS MODES"; servertag = "freenode"; },
+  { mask = "*away*"; level = "NICKS"; servertag = "freenode"; },
+  { mask = "pingbot"; level = "MODES"; },
+  { level = "JOINS PARTS QUITS MODES"; servertag = "twit"; },
+  { mask = "musical_newf"; level = "MODES"; channels = ( "&bitlbee" ); },
+  {
+    mask = "bronzedragonrider";
+    level = "MODES";
+    channels = ( "&bitlbee" );
+  },
+  {
+    mask = "bronzedragonrider";
+    level = "MODES";
+    servertag = "localhost";
+  },
+  { level = "JOINS PARTS QUITS MODES"; servertag = "di"; }
+);
+logs = { };
+hilights = (
+  { text = "Black_Chaos"; nick = "yes"; word = "yes"; },
+  { text = "DexterTheDragon"; nick = "yes"; word = "yes"; },
+  { text = "\\<Dex\\>"; nick = "no"; word = "yes"; regexp = "yes"; },
+  { text = "\\<dtd\\>"; nick = "no"; word = "yes"; regexp = "yes"; },
+  { text = "\\<Dexter\\>"; nick = "no"; word = "yes"; regexp = "yes"; }
+);
+keyboard = (
+  { key = "shift-up"; id = "command"; data = "nicklist scroll +10"; },
+  { key = "shift-down"; id = "command"; data = "nicklist scroll +10"; },
+  { key = "meta-down"; id = "command"; data = "nicklist scroll +10"; },
+  { key = "meta-next"; id = "command"; data = "nicklist scroll +10"; },
+  { key = "meta-p"; id = "change_window"; data = "20"; },
+  { key = "meta-z"; id = "active_window"; data = ""; },
+  { key = "meta-a"; id = "change_window"; data = "21"; },
+  { key = "meta-s"; id = "change_window"; data = "22"; },
+  { key = "meta-d"; id = "change_window"; data = "23"; },
+  { key = "meta-f"; id = "change_window"; data = "24"; },
+  { key = "meta-g"; id = "change_window"; data = "25"; },
+  { key = "meta-h"; id = "change_window"; data = "26"; },
+  { key = "meta-j"; id = "change_window"; data = "27"; },
+  { key = "meta-k"; id = "change_window"; data = "28"; },
+  { key = "meta-l"; id = "change_window"; data = "29"; },
+  { key = "meta-;"; id = "change_window"; data = "30"; },
+  { key = "meta-m"; id = "command"; data = "mark"; }
+);
+windows = {
+  1 = {
+    immortal = "yes";
+    name = "(status)";
+    level = "CRAP PUBLICS NOTICES SNOTES CTCPS ACTIONS JOINS PARTS QUITS KICKS MODES TOPICS WALLOPS INVITES NICKS DCC DCCMSGS CLIENTNOTICES CLIENTCRAP CLIENTERRORS HILIGHTS";
+  };
+  2 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#oalug";
+        tag = "freenode";
+      }
+    );
+  };
+  3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#uphpu";
+        tag = "freenode";
+      }
+    );
+  };
+  4 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#urug";
+        tag = "freenode";
+      }
+    );
+  };
+  5 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#utahpython";
+        tag = "freenode";
+      }
+    );
+  };
+  6 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#udbug";
+        tag = "freenode";
+      }
+    );
+  };
+  7 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#utos";
+        tag = "freenode";
+      }
+    );
+  };
+  8 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#hackutos";
+        tag = "freenode";
+      }
+    );
+  };
+  9 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#eventrevolution";
+        tag = "freenode";
+      }
+    );
+  };
+  10 = {
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "craftjan";
+        tag = "localhost";
+      }
+    );
+  };
+  11 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "&bitlbee";
+        tag = "bitlbee";
+      }
+    );
+  };
+  12 = {
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "xtrementl";
+        tag = "localhost";
+      }
+    );
+  };
+  13 = {
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "DexterTheDragon";
+        tag = "localhost";
+      }
+    );
+  };
+  19 = {
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "pingbot";
+        tag = "localhost";
+      }
+    );
+  };
+  20 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#twitter";
+        tag = "twitter";
+      }
+    );
+  };
+};
+mainwindows = { 1 = { first_line = "1"; lines = "44"; }; };
