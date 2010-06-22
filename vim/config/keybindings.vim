@@ -64,3 +64,7 @@ map <silent> <F7> :if &number <Bar>
     \set number <Bar>
     \set foldcolumn=4 <Bar>
         \endif<cr>
+
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
+endif

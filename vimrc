@@ -97,7 +97,7 @@ autocmd BufReadPost * call WarnTabs()
 
 " load everything else in its own config file
 runtime! config/**/*
-
+set diffopt=filler,iwhite,vertical
 let g:rails_statusline=0
 
 " eof
