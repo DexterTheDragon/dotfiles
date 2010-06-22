@@ -4,6 +4,10 @@ cd() {
     then builtin cd "$1" && ls
     else builtin cd && ls
     fi
+    declare -f __rvm_cd > /dev/null
+    if [ $? -eq 0 ]; then
+        __rvm_cd
+    fi
 }
 
 # http://www.shell-fu.org/lister.php?id=769
