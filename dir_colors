@@ -120,6 +120,7 @@ EXEC 01;33
 .rz 00;34
 # image formats
 .jpg 01;35
+.JPG 01;35
 .jpeg 01;35
 .gif 01;35
 .bmp 01;35
@@ -150,6 +151,7 @@ EXEC 01;33
 .m2v 00;35
 .mkv 00;35
 .ogm 00;35
+.ogv 00;35
 .mp4 00;35
 .m4v 00;35
 .mp4v 00;35
