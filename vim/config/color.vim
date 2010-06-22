@@ -3,7 +3,7 @@ syntax on                       "syn:   syntax highlighting
 "   All coloring options are for the non-GUI Vim (see :help cterm-colors).
 
 " set t_Co=16
-color desert256
+color xoria256
 
 " The default fold color is too bright and looks too much like the statusline
 " hi Folded cterm=bold ctermfg=9 ctermbg=0
