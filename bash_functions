@@ -59,4 +59,20 @@ function __bundler_ps1 {
   fi
 }
 
+function ssh-add {
+    eval file=\$$#
+    SSHADD=$(which ssh-add)
+    if [ -f ~/.ssh/$file ]; then
+        args=''
+        for i in "$@"; do
+            if [ $i != $file ]; then
+                args="$args $i"
+            fi
+        done
+        $SSHADD $args ~/.ssh/$file
+    else
+        $SSHADD $@
+    fi
+}
+
 # vim:ft=sh
