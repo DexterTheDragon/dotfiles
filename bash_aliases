@@ -33,4 +33,8 @@ alias podcatcher='podcatcher --options ~/.podcatcher.yaml'
 
 alias beb='bundle exec bash && echo "Exiting bundle exec"'
 
+alias htop='TERM=xterm htop'
+
+alias murder='kill -9'
+
 # vim:ft=sh
