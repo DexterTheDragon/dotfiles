@@ -1,1 +1,0 @@
-../external/vim-cucumber/ftplugin/cucumber.vim

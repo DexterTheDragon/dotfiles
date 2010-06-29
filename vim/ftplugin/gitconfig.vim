@@ -1,1 +1,0 @@
-../external/vim-git/ftplugin/gitconfig.vim
