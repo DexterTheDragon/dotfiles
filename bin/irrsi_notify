@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ssh $* ": > .irssi/fnotify ; tail -f .irssi/fnotify " |
+sed -u 's/[<@&]//g' | while read heading message; do
+    /usr/bin/kdialog --title "${heading}" --passivepopup "${message}" 5;
+done
