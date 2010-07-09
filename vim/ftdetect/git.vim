@@ -1,1 +1,0 @@
-../external/vim-git/ftdetect/git.vim

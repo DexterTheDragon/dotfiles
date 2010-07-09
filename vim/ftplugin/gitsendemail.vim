@@ -1,1 +1,0 @@
-../external/vim-git/ftplugin/gitsendemail.vim
