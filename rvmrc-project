@@ -1,0 +1,28 @@
+# rvm system
+dir=$(dirname $BASH_SOURCE)
+if [ -f $dir/ruby_version ]; then
+    cur_ver=$(ruby -v | awk '{printf "%s-%s-p%s", $1,$2,$5}' | sed 's/)//')
+    RUBY=$(cat $dir/ruby_version)
+    PROJECT=$(basename $dir)
+    if [ $cur_ver != $RUBY ]; then
+        rvm list strings | grep $RUBY > /dev/null
+        if [ $? != 0 ]; then
+            rvm install $RUBY
+        fi
+        rvm use $RUBY@$PROJECT
+        # if [ $? == 0 ]; then
+        # fi
+    fi
+fi
+
+if [ ! "$BUNDLE_GEMFILE" ]; then
+    which bundle > /dev/null
+    if [ $? != 0 ]; then
+        gem install bundler
+    fi
+    bundle check > /dev/null
+    if [ $? != 0 ]; then
+        bundle install
+    fi
+    bundle exec bash && echo 'Exiting bundle exec'
+fi
