@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# ORIGINALLY WRITTEN BY SCOTT MORRIS (http://www.suseblog.com/) on 2008-05-28
+# UPDATED AS SUGGESTED BY LONNIE OLSON on 2008-05-30
+
+# COLLECT SOME INFO
+IFS=$'\n'
+UPTIME=`uptime`
+D_UP=${UPTIME:1}
+MYGROUPS=`groups`
+DATE=`date`
+KERNEL=`uname -a`
+CPWD=`pwd`
+ME=`whoami`
+
+# OUTPUT THE DATA
+#printf "  user:\t\t"$USER" (uid:"$UID")\n"
+printf "  User:\t\t"$ME" (uid:"$UID")\n"
+printf "  Groups:\t"$MYGROUPS"\n"
+printf "  Working dir:\t"$CPWD"\n"
+printf "  Home dir:\t"$HOME"\n"
+printf "  Hostname:\t"$HOSTNAME"\n"
+ip -o addr | awk '/inet /{print "  IP (" $2 "):\t" $4}'
+printf "  Date:\t\t"$DATE"\n"
+printf "  Uptime:\t"$D_UP"\n"
+printf "  Kernel:\t"$KERNEL"\n"
+printf "  Cpu:\t\t"$CPU"\n"
+free -mot | awk '
+/Mem/{print "  Memory:\tTotal: " $2 "Mb\tUsed: " $3 "Mb\tFree: " $4 "Mb"}
+/Swap/{print "  Swap:\t\tTotal: " $2 "Mb\tUsed: " $3 "Mb\tFree: " $4 "Mb"}'
