@@ -75,4 +75,11 @@ function ssh-add {
     fi
 }
 
+llaon() {
+    alias ll='ls -lA'
+}
+llaoff() {
+    alias ll='ls -l'
+}
+
 # vim:ft=sh
