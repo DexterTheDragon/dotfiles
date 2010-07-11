@@ -21,6 +21,14 @@ rescue LoadError => err
 end
 
 begin
+  # load Hirb
+  require 'hirb'
+  Hirb.enable
+rescue LoadError => err
+  warn "Couldn't load Hirb: #{err}"
+end
+
+begin
   # Wirble autoloads pp and irb/completion, it also enables history
   require 'wirble'
   Wirble.init
