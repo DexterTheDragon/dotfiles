@@ -49,7 +49,8 @@ begin
     alias_method :orig_methods, :methods
 
     def methods(*args)
-      if caller.first =~ /\(irb\):\d+:in `irb_binding'/
+      # puts caller.first
+      if caller.first =~ /\(irb\):\d+(:in `irb_binding')?/
         lp(self, *args)
       else
         orig_methods
