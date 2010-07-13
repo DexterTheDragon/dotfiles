@@ -28,6 +28,9 @@ rescue LoadError => err
   warn "Couldn't load Hirb: #{err}"
 end
 
+# Require UtilityBelt for lots of functionality
+# http://utilitybelt.rubyforge.org/
+
 begin
   # Wirble autoloads pp and irb/completion, it also enables history
   require 'wirble'
@@ -91,7 +94,7 @@ end
 
 
 # Just for Rails...
-if ENV.include?('RAILS_ENV')
+if ENV.include?('RAILS_ENV') || defined?(Rails)
   rails_root = File.basename(Dir.pwd)
   IRB.conf[:PROMPT] ||= {}
   IRB.conf[:PROMPT][:RAILS] = {
@@ -105,10 +108,32 @@ if ENV.include?('RAILS_ENV')
 
   # Called after the irb session is initialized and Rails has
   # been loaded (props: Mike Clark).
-  IRB.conf[:IRB_RC] = Proc.new do
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
-    ActiveRecord::Base.instance_eval { alias :[] :find }
+  # IRB.conf[:IRB_RC] = Proc.new do
+    # ActiveRecord::Base.logger = Logger.new(STDOUT)
+    # ActiveRecord::Base.instance_eval { alias :[] :find }
+  # end
+
+  require 'logger'
+  if defined?(Rails) && Rails.respond_to?(:logger=)
+    Rails.logger = Logger.new(STDOUT)
+    ActiveRecord::Base.logger = Rails.logger
+  else
+    Object.const_set(:RAILS_DEFAULT_LOGGER, Logger.new(STDOUT))
   end
+
+  def loud_logger
+    set_logger_to Logger.new(STDOUT)
+  end
+
+  def quiet_logger
+    set_logger_to nil
+  end
+
+  def set_logger_to(logger)
+    ActiveRecord::Base.logger = logger
+    ActiveRecord::Base.clear_active_connections!
+  end
+
 end
 
 ## Notify us of the version and that it is ready.
