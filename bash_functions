@@ -1,5 +1,21 @@
 # list contents right after changing directories
 cd() {
+    # check if were in a bundle and exit if we are going above the project root
+    if [ "$BUNDLE_GEMFILE" ]; then
+        if [ "$1" ]
+            then PATHTO=$1
+            else PATHTO=~
+        fi
+        if [ $(expr match "$PATHTO" "/") != 1 ]; then
+            PATHTO="$(pwd)/$PATHTO"
+        fi
+        PROJECTPATH=$(dirname $BUNDLE_GEMFILE)
+        if [ $(expr match "$PATHTO" "$PROJECTPATH") != ${#PROJECTPATH} ]; then
+            echo "WARNING: STILL IN BUNDLE"
+            exit
+        fi
+    fi
+
     if [ "$1" ]
     then builtin cd "$1" && ls
     else builtin cd && ls
