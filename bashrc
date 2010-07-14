@@ -112,6 +112,8 @@ if [ -f ~/.dir_colors ]; then
     eval `dircolors ~/.dir_colors`
 fi
 
+stty -ixon
+
 # rvm installer added line:
 if [ -s ~/.rvm/scripts/rvm ] ; then source ~/.rvm/scripts/rvm ; fi
 [[ -r $rvm_path/scripts/completion ]] && source $rvm_path/scripts/completion
