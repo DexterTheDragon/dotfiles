@@ -1,0 +1,30 @@
+# Global Settings
+# #############################################################################
+
+Protocol 2
+Compression yes
+ForwardAgent yes
+ForwardX11 yes
+ForwardX11Trusted yes
+HashKnownHosts no
+
+Host *
+    # ControlMaster auto
+    # ControlPath ~/.ssh/master-%r@%h:%p
+    ServerAliveInterval 300
+    TCPKeepAlive yes
+
+
+# Host-specific settings
+# #############################################################################
+
+Host divergentlogic
+    Hostname office.divergentlogic.com
+    Port 2222
+    DynamicForward 9050
+    ForwardX11 yes
+    ForwardX11Trusted yes
+
+Host dexterthedragon deathstar
+    Hostname dexterthedragon.com
+    Port 443
