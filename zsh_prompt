@@ -30,7 +30,25 @@ function set_prompt() {
     # Current dir; show in yellow if not writable
     [[ -w $PWD ]] && infoline+=( ${blue} ) || infoline+=( ${b_red} )
     infoline+=( "%~${reset} " )
-    #
+
+    # I want to know my battery percentage when running on battery power
+    if which ibam &> /dev/null; then
+        local BATTSTATE="$(ibam --percentbattery)"
+        local BATTPRCNT="${BATTSTATE[(f)1][(w)-2]}"
+        local BATTTIME="${BATTSTATE[(f)2][(w)-1]}"
+        PR_BATTERY="B:${BATTPRCNT}%% (${BATTTIME}) "
+        if [[ "${BATTPRCNT}" -lt 15 ]]; then
+            PR_BATTERY="${PR_BOLD_RED}${PR_BATTERY}"
+        elif [[ "${BATTPRCNT}" -lt 50 ]]; then
+            PR_BATTERY="${PR_BOLD_YELLOW}${PR_BATTERY}"
+        elif [[ "${BATTPRCNT}" -lt 100 ]]; then
+            PR_BATTERY="${PR_BATTERY}"
+        else
+            PR_BATTERY=""
+        fi
+        infoline+=( $PR_BATTERY )
+    fi
+
     # Username & host
     infoline+=( "${green}%n" )
     [[ -n $SSH_CLIENT ]] && infoline+=( "@%m" )
