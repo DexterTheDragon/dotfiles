@@ -1,5 +1,6 @@
 # rvm system
-dir=$(dirname $BASH_SOURCE)
+# guess the path to .rvmrc in bash or zsh
+dir=$(dirname ${BASH_SOURCE:-$0})
 if [ -f $dir/ruby_version ]; then
     cur_ver=$(ruby -v | awk '{printf "%s-%s-p%s", $1,$2,$5}' | sed 's/)//')
     RUBY=$(cat $dir/ruby_version)
@@ -24,5 +25,5 @@ if [ ! "$BUNDLE_GEMFILE" ]; then
     if [ $? != 0 ]; then
         bundle install
     fi
-    bundle exec bash && echo 'Exiting bundle exec'
+    bundle exec $SHELL && echo 'Exiting bundle exec'
 fi
