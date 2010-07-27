@@ -8,4 +8,8 @@
 --type-add
 ruby=.haml
 --type-add
+cucumber=.feature
+--type-add
+cucumber=.scenario
+--type-add
 php=.ctp
