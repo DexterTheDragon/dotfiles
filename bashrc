@@ -96,16 +96,16 @@ bind -m vi-insert "\C-n":menu-complete
 bind -m vi-insert "\C-l":clear-screen
 
 # source various files
-if [ -f ~/.environment ]; then
-    . ~/.environment
+if [ -f ~/.shell_environment ]; then
+    . ~/.shell_environment
 fi
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.shell_aliases ]; then
+    . ~/.shell_aliases
 fi
 
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
+if [ -f ~/.shell_functions ]; then
+    . ~/.shell_functions
 fi
 
 if [ -f ~/.dir_colors ]; then
