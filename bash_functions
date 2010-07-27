@@ -26,6 +26,7 @@ cd() {
     fi
 }
 
+# ..(), ...() for quickly changing $CWD {{{1
 # http://www.shell-fu.org/lister.php?id=769
 
 # Go up n levels:
@@ -56,6 +57,7 @@ function ... (){
         fi
     done
 }
+# }}}
 
 spell (){
     echo $1 | aspell -a
@@ -75,7 +77,7 @@ function __bundler_ps1 {
   fi
 }
 
-function ssh-add {
+function sa {
     eval file=\$$#
     SSHADD=$(which ssh-add)
     if [ -f ~/.ssh/$file ]; then
@@ -97,5 +99,11 @@ llaon() {
 llaoff() {
     alias ll='ls -l'
 }
+
+# Output total memory currently in use by you {{{1
+memtotal() {
+    /bin/ps -u $(whoami) -o pid,rss,command | awk '{sum+=$2} END {print "Total " sum / 1024 " MB"}'
+}
+# }}}
 
 # vim:ft=sh
