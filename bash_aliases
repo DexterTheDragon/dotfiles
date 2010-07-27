@@ -3,8 +3,8 @@ alias ll='ls -l'
 alias la='ls -lA'
 alias l='ls -CF'
 
-alias vim='vim -p'
 alias vi='vim'
+alias vim='vim -p'
 
 alias o='xdg-open'
 
@@ -36,5 +36,10 @@ alias beb='bundle exec bash && echo "Exiting bundle exec"'
 alias htop='TERM=xterm htop'
 
 alias murder='kill -9'
+
+# Python development helpers {{{
+alias pyhttp='python -m SimpleHTTPServer'
+alias pysmtp='python -m smtpd -n -c DebuggingServer localhost:1025'
+# }}}
 
 # vim:ft=sh
