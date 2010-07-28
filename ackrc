@@ -7,9 +7,11 @@
 # Add file types
 --type-add
 ruby=.haml
---type-add
+
+--type-set
 cucumber=.feature
 --type-add
 cucumber=.scenario
+
 --type-add
 php=.ctp
