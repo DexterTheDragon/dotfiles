@@ -12,3 +12,6 @@
 .DS_Store
 .svn
 *.pyc
+
+.rake_tasks
+.cap_tasks
