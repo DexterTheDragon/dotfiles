@@ -83,6 +83,8 @@ compinit -C
 zstyle ':completion:*' list-colors "$LS_COLORS"
 zstyle -e ':completion:*:(ssh|sssh|scp|sshfs|ping|telnet|ftp|rsync):*' hosts 'reply=(${=${${(M)${(f)"$(<~/.ssh/config)"}:#Host*}#Host }:#*\**})'
 
+source ~/.rake_completion.zsh
+
 # }}}
 # {{{ prompt and theme
 
