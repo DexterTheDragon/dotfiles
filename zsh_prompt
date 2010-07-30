@@ -20,16 +20,19 @@ function precmd {
     set_prompt
     set_rprompt
 }
-# %{$bold_color$fg[green]%}%n@%m%{$reset_color%}:%{$bold_color$fg[blue]%}%~%{$reset_color%} $(__git_ps1 "(%s)")$(~/.rvm/bin/rvm-prompt 2>/dev/null)$(__bundler_ps1 "[%s]")\n%j %#
 
 function set_prompt() {
     local -a lines infoline
-    local x i filler i_width i_pad
+    local x i filler i_width i_pad space
 
     ### First, assemble the top line
     # Current dir; show in yellow if not writable
     [[ -w $PWD ]] && infoline+=( ${blue} ) || infoline+=( ${b_red} )
     infoline+=( "%~${reset} " )
+
+    # show disk space
+    space=$(df ./ | grep -v Filesystem)
+    infoline+=( "D:$(echo $space | awk '{print $5}')% ($(echo $space | awk '{print $4}')/$(echo $space | awk '{print $2}')) " )
 
     # I want to know my battery percentage when running on battery power
     if which ibam &> /dev/null; then
