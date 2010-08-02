@@ -76,6 +76,23 @@ SAVEHIST=4096
 # WINEDEBUG=-all
 
 # }}}
+# {{{ source files
+if [ -f ~/.shell_environment ]; then
+    . ~/.shell_environment
+fi
+
+if [ -f ~/.shell_aliases ]; then
+    . ~/.shell_aliases
+fi
+
+if [ -f ~/.shell_functions ]; then
+    . ~/.shell_functions
+fi
+
+if [ -f ~/.dir_colors ]; then
+    eval `dircolors ~/.dir_colors`
+fi
+# }}}
 # {{{ completions
 
 autoload -U compinit
@@ -178,22 +195,6 @@ if [[ -n "$ZSHRUN" ]]; then
 fi
 
 # }}}
-
-if [ -f ~/.shell_environment ]; then
-    . ~/.shell_environment
-fi
-
-if [ -f ~/.shell_aliases ]; then
-    . ~/.shell_aliases
-fi
-
-if [ -f ~/.shell_functions ]; then
-    . ~/.shell_functions
-fi
-
-if [ -f ~/.dir_colors ]; then
-    eval `dircolors ~/.dir_colors`
-fi
 # EOF
 # rvm installer added line:
 if [ -s ~/.rvm/scripts/rvm ] ; then source ~/.rvm/scripts/rvm ; fi
