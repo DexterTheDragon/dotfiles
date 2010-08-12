@@ -1,3 +1,4 @@
+# vim:ft=zsh
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
 else
@@ -5,24 +6,49 @@ else
     echo 'WARNING: 256 color support is not enabled'
 fi
 
+# umask 027
+
 export PATH=~/.bin/:/opt/komodo/:~/dev/cakephp/cake/console/:/var/lib/gems/1.8/bin/:$PATH
 # CDPATH=$CDPATH::$HOME:/usr/local
 
-export EDITOR=vim
-export VISUAL=vim
-# LESS='-imJMWR'
-# PAGER="less $LESS"
-# MANPAGER=$PAGER
+# PYTHONPATH=$HOME/lib/python/site-packages:$HOME/src:$PYTHONPATH
+# PYTHONSTARTUP=$HOME/.pythonrc.py
+# export PYTHONSTARTUP PYTHONPATH
 
-HISTFILE=$HOME/.zsh_history
+# Local development projects go here
+# SRCDIR=$HOME/src
+
+HISTFILE=$HOME/.`basename $SHELL`_history
 HISTFILESIZE=65536  # search this with `grep | sort -u`
 HISTSIZE=4096
 SAVEHIST=4096
 
+export EDITOR=vim
+export VISUAL=vim
+export LESS='-imJMWR'
+export PAGER="less $LESS"
+export MANPAGER=$PAGER
+
+# utf-8 in the terminal, will break stuff if your term isn't utf aware
+# LANG=en_US.UTF-8
+# LC_ALL=$LANG
+# LC_COLLATE=C
+
 REPORTTIME=60       # Report time statistics for progs that take more than a minute to run
+LISTMAX=0           # ask to complete if top of list would scroll off screen
 # WATCH=notme         # Report any login/logout of other users
 # WATCHFMT='%n %a %l from %m at %T.'
 
-# export RUBYOPT='rubygems'
+# Colorful manpages
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 
-# vim:ft=sh
+# Silence Wine debugging output (why isn't this a default?)
+# WINEDEBUG=-all
+
+# export RUBYOPT='rubygems'

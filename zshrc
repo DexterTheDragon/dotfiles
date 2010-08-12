@@ -22,34 +22,13 @@ setopt                          \
         path_dirs               \
         prompt_percent          \
         prompt_subst            \
-        rm_star_wait
+        rm_star_wait            \
+        correct
 
         # ignore_eof              \
 
 # Push a command onto a stack allowing you to run another command first
 bindkey '^J' push-line
-
-# }}}
-# {{{ environment settings
-
-# umask 027
-
-# path+=( $HOME/bin /sbin /usr/sbin /usr/local/sbin ); path=( ${(u)path} );
-
-# PYTHONPATH=$HOME/lib/python/site-packages:$HOME/src:$PYTHONPATH
-# PYTHONSTARTUP=$HOME/.pythonrc.py
-# export PYTHONSTARTUP PYTHONPATH
-
-# Local development projects go here
-# SRCDIR=$HOME/src
-
-# utf-8 in the terminal, will break stuff if your term isn't utf aware
-# LANG=en_US.UTF-8
-# LC_ALL=$LANG
-# LC_COLLATE=C
-
-# Silence Wine debugging output (why isn't this a default?)
-# WINEDEBUG=-all
 
 # }}}
 # {{{ source files
