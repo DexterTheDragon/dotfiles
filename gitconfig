@@ -1,13 +1,17 @@
+[alias]
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset (%aN <%aE>)' --abbrev-commit --date=relative
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    showbranch = auto
+    status = auto
+[core]
+    excludesfile = ~/.gitexcludes
+[merge]
+    tool = vimdiff
+[push]
+    default = tracking
 [user]
     email = cartkev@gmail.com
     name = Kevin Carter
-[core]
-    excludesfile = ~/.gitexcludes
-[color]
-    diff = auto
-    status = auto
-    branch = auto
-[merge]
-    tool = vimdiff
-[alias]
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset (%aN <%aE>)' --abbrev-commit --date=relative
