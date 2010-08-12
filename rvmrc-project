@@ -5,25 +5,33 @@ if [ -f $dir/ruby_version ]; then
     cur_ver=$(ruby -v | awk '{printf "%s-%s-p%s", $1,$2,$5}' | sed 's/)//')
     RUBY=$(cat $dir/ruby_version)
     PROJECT=$(basename $dir)
+    # TODO: this current ruby check has been fixed in latest rvm I think
     if [ $cur_ver != $RUBY ]; then
+        # see if we have this version of ruby installed
         rvm list strings | grep $RUBY > /dev/null
+        # if not install it
         if [ $? != 0 ]; then
             rvm install $RUBY
         fi
+        # use the ruby version with a gemset
         rvm use $RUBY@$PROJECT
-        # if [ $? == 0 ]; then
-        # fi
+        if [[ $? == 0 ]]; then
+            # see if bundler is installed
+            which bundle > /dev/null
+            # if not install it
+            if [ $? != 0 ]; then
+                gem install bundler
+            fi
+            # check if the bundle is upto date
+            bundle check > /dev/null
+            # update the bundle if needs be
+            if [ $? != 0 ]; then
+                bundle install
+            fi
+        fi
     fi
 fi
 
 if [ ! "$BUNDLE_GEMFILE" ]; then
-    which bundle > /dev/null
-    if [ $? != 0 ]; then
-        gem install bundler
-    fi
-    bundle check > /dev/null
-    if [ $? != 0 ]; then
-        bundle install
-    fi
-    bundle exec $SHELL && echo 'Exiting bundle exec'
+    # bundle exec $SHELL && echo 'Exiting bundle exec'
 fi
