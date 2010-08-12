@@ -8,6 +8,7 @@
     status = auto
 [core]
     excludesfile = ~/.gitexcludes
+    pager = less -FRSX
 [merge]
     tool = vimdiff
 [push]
