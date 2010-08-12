@@ -8,4 +8,4 @@ let NERDSpaceDelims=1
 " Don't nest comments
 let NERDDefaultNesting=0
 
-map ,/ ,c<space>
+map <leader>/ ,c<space>

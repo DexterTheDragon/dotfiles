@@ -7,6 +7,8 @@ set nowrap                        "wrap:  wraps lines by default
 " }}}
 " Editing {{{
 
+let mapleader = ","
+
 set showmatch                   "sm:    flashes matching brackets or parentheses
 set matchtime=3
 

@@ -1,21 +1,56 @@
+" specified elsewhere for now
+" map <leader>/ ,c<space> " nerdcommenter
+" nnoremap <silent> <F2> :YRShow<CR>
+" map <F3> :TlistToggle<cr>
+" map <F4> :NERDTreeToggle<cr>
+" php
+" <leader>p PhpDoc string
+" vaP/viP PhpBlockSelect
+" <F9> rebuild ctags
+
 " Fix for legacy vi inconsistency
 map Y y$
 
+" FUNCTION KEYS {{{
 " Type <F1> follwed by a buffer number or name fragment to jump to it.
 " Also replaces the annoying help button. Based on tip 821.
 map <F1> :ls<CR>:b<Space>
 
-" A shortcut to show the numbered register contents
-map <F2> :reg "0123456789-*+:/<CR>
+" <F2> YankRing
+" <F3> TlistToggle
+" <F4> NERDTreeToggle
+" <F5> pastetoggle
 
 " Toggle hidden characters display
 map <silent> <F6> :set nolist!<CR>:set nolist?<CR>
 
+" toggle line numbers and fold column w00t!
+map <silent> <F7> :if &number <Bar>
+    \set nonumber <Bar>
+    \set foldcolumn=0 <Bar>
+        \else <Bar>
+    \set number <Bar>
+    \set foldcolumn=4 <Bar>
+        \endif<cr>
+
 " Toggle spell-checking
 map <silent> <F8> :set nospell!<CR>:set nospell?<CR>
+" <F9> rebuild ctags
+
+" }}}
+
+" LEADER MAPS {{{
+nmap <silent> <leader>h :silent noh<CR>
+
+" Centers, left, or right-justifies text
+noremap <silent> ,c :ce <CR> << <CR>
+noremap <silent> ,l :le <CR>
+noremap <silent> ,r :ri <CR>
 
 " Toggle line wrapping in normal mode:
-nmap <silent> <C-P> :set nowrap!<CR>:set nowrap?<CR>
+nmap <silent> <leader>w :set nowrap!<CR>:set nowrap?<CR>
+
+" }}}
 
 " SVN Diffs
 " Small, fast, windowed svn diff
@@ -37,7 +72,6 @@ nmap <C-K> <C-W>k
 nmap <C-H> <C-W>h
 nmap <C-L> <C-W>l
 
-
 " Quit using arrow keys!
 "map <Up> :q<CR>
 "map <Down> :q<CR>
@@ -49,21 +83,6 @@ map <Tab> >>
 map <S-Tab> <<
 vmap <Tab> >
 vmap <S-Tab> <
-
-" Centers, left, or right-justifies text
-noremap <silent> ,c :ce <CR> << <CR>
-noremap <silent> ,l :le <CR>
-noremap <silent> ,r :ri <CR>
-
-
-" toggle line numbers and fold column w00t!
-map <silent> <F7> :if &number <Bar>
-    \set nonumber <Bar>
-    \set foldcolumn=0 <Bar>
-        \else <Bar>
-    \set number <Bar>
-    \set foldcolumn=4 <Bar>
-        \endif<cr>
 
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis

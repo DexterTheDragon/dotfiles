@@ -43,5 +43,5 @@ let g:yankring_paste_check_default_buffer = 1
 " Keybindings
 let g:yankring_replace_n_nkey = '<m-n>'
 " use <Leader>y to open the YankRing window
-:nnoremap <silent> <Leader>y :YRShow<CR>
+nnoremap <silent> <Leader>y :YRShow<CR>
 nnoremap <silent> <F2> :YRShow<CR>
