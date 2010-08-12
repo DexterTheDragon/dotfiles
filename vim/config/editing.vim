@@ -73,3 +73,36 @@ if v:version >= 700
 endif
 
 " }}}
+" Autocommands, plugin, and file-type-specific settings {{{
+" Remember last position in file
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+" Remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Helps if you have to use another editor on the same file
+autocmd FileChangedShell *
+    \ echohl WarningMsg |
+    \ echo "File has been changed outside of vim." |
+    \ echohl None
+
+" Makes the current buffer a scratch buffer
+function! Scratch()
+    set buftype=nofile
+    set bufhidden=delete
+    set noswapfile
+endfunction
+
+" Outputs a small warning when opening a file that contains tab characters
+function! WarnTabs()
+    if searchpos('\t') != [0,0]
+        echohl WarningMsg |
+        \ echo "Warning, this file contains tabs." |
+        \ echohl None
+    endif
+endfunction
+autocmd BufReadPost * call WarnTabs()
+" }}}
