@@ -32,17 +32,9 @@ bindkey '^J' push-line
 # }}}
 # {{{ environment settings
 
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-    export TERM='xterm-256color'
-else
-    export TERM='xterm-color'
-    echo 'WARNING: 256 color support is not enabled'
-fi
-
 # umask 027
 
 # path+=( $HOME/bin /sbin /usr/sbin /usr/local/sbin ); path=( ${(u)path} );
-# CDPATH=$CDPATH::$HOME:/usr/local
 
 # PYTHONPATH=$HOME/lib/python/site-packages:$HOME/src:$PYTHONPATH
 # PYTHONSTARTUP=$HOME/.pythonrc.py
@@ -51,26 +43,10 @@ fi
 # Local development projects go here
 # SRCDIR=$HOME/src
 
-HISTFILE=$HOME/.zsh_history
-HISTFILESIZE=65536  # search this with `grep | sort -u`
-HISTSIZE=4096
-SAVEHIST=4096
-
-# REPORTTIME=60       # Report time statistics for progs that take more than a minute to run
-# WATCH=notme         # Report any login/logout of other users
-# WATCHFMT='%n %a %l from %m at %T.'
-
 # utf-8 in the terminal, will break stuff if your term isn't utf aware
 # LANG=en_US.UTF-8
 # LC_ALL=$LANG
 # LC_COLLATE=C
-
-# EDITOR=vi
-# VISUAL=vi
-# LESS='-imJMWR'
-# PAGER="less $LESS"
-# MANPAGER=$PAGER
-# BROWSER='chromium-browser'
 
 # Silence Wine debugging output (why isn't this a default?)
 # WINEDEBUG=-all

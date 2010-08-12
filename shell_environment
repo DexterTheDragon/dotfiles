@@ -1,5 +1,27 @@
-export EDITOR=vim
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+    export TERM='xterm-256color'
+else
+    export TERM='xterm-color'
+    echo 'WARNING: 256 color support is not enabled'
+fi
+
 export PATH=~/.bin/:/opt/komodo/:~/dev/cakephp/cake/console/:/var/lib/gems/1.8/bin/:$PATH
+# CDPATH=$CDPATH::$HOME:/usr/local
+
+export EDITOR=vim
+export VISUAL=vim
+# LESS='-imJMWR'
+# PAGER="less $LESS"
+# MANPAGER=$PAGER
+
+HISTFILE=$HOME/.zsh_history
+HISTFILESIZE=65536  # search this with `grep | sort -u`
+HISTSIZE=4096
+SAVEHIST=4096
+
+REPORTTIME=60       # Report time statistics for progs that take more than a minute to run
+# WATCH=notme         # Report any login/logout of other users
+# WATCHFMT='%n %a %l from %m at %T.'
 
 # export RUBYOPT='rubygems'
 
