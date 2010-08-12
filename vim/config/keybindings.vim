@@ -11,6 +11,9 @@
 " Fix for legacy vi inconsistency
 map Y y$
 
+nnoremap ' `
+nnoremap ` '
+
 " FUNCTION KEYS {{{
 " Type <F1> follwed by a buffer number or name fragment to jump to it.
 " Also replaces the annoying help button. Based on tip 821.
