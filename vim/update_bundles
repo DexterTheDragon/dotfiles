@@ -37,6 +37,7 @@ vim_org_scripts = [
   ['SearchComplete', '1388', 'plugin'],
   # ['SuperTab', '11853', 'vba'],
   ['php', '8651', 'tar.gz'],
+  ['pydoc', '13092', 'plugin'],
   #
   # ["IndexedSearch", "7062",  "plugin"],
   # ["gist",          "12732", "plugin"],

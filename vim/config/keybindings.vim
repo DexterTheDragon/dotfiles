@@ -53,6 +53,8 @@ noremap <silent> ,r :ri <CR>
 " Toggle line wrapping in normal mode:
 nmap <silent> <leader>w :set nowrap!<CR>:set nowrap?<CR>
 
+map <leader>e :py EvaluateCurrentRange()
+
 " }}}
 
 " SVN Diffs
@@ -68,6 +70,11 @@ nmap K :Man <C-R>=expand("<cword>")<CR><CR>
 " Vim Help docs: hit enter to activate links, and backspace as a back button
 au FileType help nmap <buffer> <Return> <C-]>
 au FileType help nmap <buffer> <BS> <C-o>
+
+
+
+map <silent><C-Left> <C-T>
+map <silent><C-Right> <C-]>
 
 " ctrl-h,j,k,l will move between split windows
 nmap <C-J> <C-W>j
