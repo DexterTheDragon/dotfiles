@@ -15,7 +15,7 @@ git_bundles = [
 
   'git://github.com/DexterTheDragon/vim-rest.git',
   "git://github.com/tsaleh/vim-supertab.git",
-  # "git://github.com/tsaleh/vim-align.git",
+  "git://github.com/tsaleh/vim-align.git",
 
 
 
