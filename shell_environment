@@ -52,3 +52,4 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 # WINEDEBUG=-all
 
 # export RUBYOPT='rubygems'
+export CHEF_CLIENT_NAME=kcarter
