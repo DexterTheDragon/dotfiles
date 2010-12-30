@@ -6,8 +6,9 @@
 # Author: Doga Armangil, armangild@yahoo.com
 
 PODCATCHER_WEBSITE = 'http://podcatcher.rubyforge.org/'
-PODCATCHER_VERSION = '3.1.5'
+PODCATCHER_VERSION = '3.1.6alpha'
 
+# todo: --proxy option
 # todo: download at most one enclosure or media:content per rss item
 # todo: support for --content and --language options in search mode
 # todo: code refactoring: do not duplicate option handling for 'options' option, factor out conversion between MIME type and file extension, avoid code duplication between implementations of download and search functions
@@ -23,6 +24,7 @@ PODCATCHER_VERSION = '3.1.5'
 # todo: option to download shows concurrently
 # todo: "lock" directory to prevent concurrency issues
 # todo: option to throttle non-BitTorrent downloads
+# 3.1.6alpha: fixes a bug whereby a failed content download caused all other content from the same feed to be ignored
 # 3.1.5: updated --arguments file format (# now comments out line), updated sponsor message
 # 3.1.4: added publication date to content titles in generated playlists, added better handling of invalid URLs in feeds and subscription lists (such URLs are now simply ignored instead of causing the whole document to be skipped)
 # 3.1.3: --restrictednames option is now enabled by default, fixed directory name generation bug that allowed '!' character when --perfeed and --restrictednames options were used simultaneously, updated sponsor message
@@ -1955,6 +1957,7 @@ class Cache
           end
           sleep 5
         end
+        redo unless content.file # skip unavailable enclosures
         redo if @opt.itemsize > itemsize
         itemsize = 0
       end
@@ -2085,67 +2088,26 @@ private
     rescue Exception
     # $stderr.puts "error: #{$!}"
     end
-    ext = [""]
+
     if content.metainfo
       begin
-        ext = ["."+content.metainfo.info.name.split(".").reverse[0]]
+        name = content.metainfo.info.name
       rescue Exception
       end
     else
-      ext = case content.mime.downcase
-        when "audio/mpeg"
-          [".mp3", ".m4a"]
-        when "audio/x-mpeg"
-          [".mp3"]
-        when "audio/x-ms-wma"
-          [".wma"]
-        when "audio/x-m4a"
-          [".m4a"]
-        when "video/mpeg"
-          [".mpg",".mpeg",".mpe",".mpa",".mp2",".mpv2"]
-        when "video/quicktime"
-          [".mov",".qt"]
-        when "video/x-msvideo"
-          [".avi"]
-        when "video/x-ms-wmv"
-          [".wmv"]
-        when "video/x-ms-asf"
-          [".asf"]
-        when "video/mp4"
-          [".m4v", ".mp4",".mpg4"]
-        when "video/x-m4v"
-          [".m4v", ".mp4",".mpg4"]
-        else
-          [""]
-        end
+      urlname = nil
+      urlname = URI.split(content.redirection_url)[5].split("/")[-1] if content.redirection_url
+      urlname = URI.split(content.url)[5].split("/")[-1] unless urlname
+      name = URI.unescape(urlname)
     end
-    #name from url?
-    name = nil
-    begin
-      if content.metainfo
-        name = content.metainfo.info.name
-        name = nil if (dir+name).exist?
-      else
-        urlname = nil
-        urlname = URI.split(content.redirection_url)[5].split("/")[-1] if content.redirection_url
-        urlname = URI.split(content.url)[5].split("/")[-1] unless urlname
-        ext.each() do |e|
-          if e.length == 0 or urlname[-e.length..-1].downcase == e
-            name = urlname
-            name = URI.unescape(name)
-            name = nil if (dir+name).exist?
-            break if name
-          end
-        end
-      end
-    rescue Exception
-    end
+    orig_name = name if (dir+name).exist?
+
     #unique name?
     loop do
-      name = Time.now.to_f.to_s+ext[0]
+      name = "#{Time.now.to_i.to_s}.#{orig_name}"
       break unless (dir+name).exist?
       sleep 1
-    end unless name
+    end if (dir+name).exist?
     dir+name
   end
 end
