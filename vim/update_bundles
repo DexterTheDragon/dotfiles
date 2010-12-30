@@ -17,6 +17,24 @@ git_bundles = [
   "git://github.com/tsaleh/vim-supertab.git",
   "git://github.com/tsaleh/vim-align.git",
 
+  "git://github.com/kana/vim-textobj-user.git",
+  "git://github.com/nelstrom/vim-textobj-rubyblock.git",
+
+
+  # screw you vim.org
+  # http://github.com/vim-scripts/matchit.zip
+  # http://github.com/vim-scripts/taglist.vim
+  # http://github.com/vim-scripts/YankRing.vim
+  # http://github.com/vim-scripts/SearchComplete
+  # http://github.com/vim-scripts/php.vim--Hodge
+  # http://github.com/vim-scripts/pydoc.vim
+  # http://github.com/vim-scripts/searchfold.vim
+  # http://github.com/vim-scripts/TaskList.vim
+  # http://github.com/vim-scripts/rest.vim
+  # http://github.com/vim-scripts/Align
+  #
+  # http://github.com/ervandew/supertab
+
 
 
   # "git://github.com/astashov/vim-ruby-debugger.git",
