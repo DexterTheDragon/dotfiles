@@ -16,3 +16,6 @@
 [user]
     email = cartkev@gmail.com
     name = Kevin Carter
+
+[url "ca.utio.us:/git/divergentlogic/"]
+    insteadOf = dl://
