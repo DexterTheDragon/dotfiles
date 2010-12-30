@@ -106,3 +106,42 @@ memtotal() {
     /bin/ps -u $(whoami) -o pid,rss,command | awk '{sum+=$2} END {print "Total " sum / 1024 " MB"}'
 }
 # }}}
+
+itunespodcast() {
+    curl -A 'iTunes/9.0.2 (Windows; Microsoft Windows XP Professional Service Pack 2 (Build 2600)) AppleWebKit/531.22.7' \
+    $1 2>/dev/null | grep feedURL | sort -u
+}
+
+ml() { (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2=$4="";1') | column -t; }
+
+#intercept calls to svn
+svn () {
+    #bail if the user didnt specify which subversion command to invoke
+    if [ $# -lt 1 ]; then
+        command svn
+        return
+    fi
+
+    local sub_cmd=$1
+    shift
+
+    #intercept svn diff commands
+    if [[ $sub_cmd =~ ^(di) ]]; then
+        #colorize the diff
+        #remove stupid ^M dos line endings
+        #page it if there's more one screen
+        command svn diff "$@" | colordiff | sed -e 's/\r//g' | less -RF
+
+    #page some stuff I often end up paging manually
+    elif [[ $sub_cmd =~ ^(status|log|blame|help)$ ]]; then
+        command svn $sub_cmd $@ | less -FRSX
+
+    #let svn handle it as normal
+    else
+        command svn $sub_cmd "$@"
+    fi
+}
+
+reloaddb() {
+    mysqladmin -f drop $1 && mysqladmin create $1 && zcat $2 | mysql $1
+}
