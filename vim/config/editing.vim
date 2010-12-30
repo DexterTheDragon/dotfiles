@@ -107,4 +107,5 @@ function! WarnTabs()
     endif
 endfunction
 autocmd BufReadPost * call WarnTabs()
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 " }}}

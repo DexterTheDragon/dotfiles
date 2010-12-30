@@ -13,24 +13,28 @@ git_bundles = [
   'git://github.com/tpope/vim-surround.git',
   'git://github.com/mattn/gist-vim.git',
 
-  'git://github.com/DexterTheDragon/vim-rest.git',
+  # 'git://github.com/DexterTheDragon/vim-rest.git',
   "git://github.com/tsaleh/vim-supertab.git",
   "git://github.com/tsaleh/vim-align.git",
 
   "git://github.com/kana/vim-textobj-user.git",
   "git://github.com/nelstrom/vim-textobj-rubyblock.git",
 
-
   # screw you vim.org
-  # http://github.com/vim-scripts/matchit.zip
-  # http://github.com/vim-scripts/taglist.vim
-  # http://github.com/vim-scripts/YankRing.vim
-  # http://github.com/vim-scripts/SearchComplete
-  # http://github.com/vim-scripts/php.vim--Hodge
-  # http://github.com/vim-scripts/pydoc.vim
-  # http://github.com/vim-scripts/searchfold.vim
-  # http://github.com/vim-scripts/TaskList.vim
-  # http://github.com/vim-scripts/rest.vim
+  "git://github.com/vim-scripts/matchit.zip.git",
+  "git://github.com/vim-scripts/taglist.vim.git",
+  "git://github.com/vim-scripts/YankRing.vim.git",
+  "git://github.com/vim-scripts/SearchComplete.git",
+  "git://github.com/vim-scripts/php.vim--Hodge.git",
+  "git://github.com/vim-scripts/pydoc.vim.git",
+  "git://github.com/vim-scripts/searchfold.vim.git",
+  "git://github.com/vim-scripts/TaskList.vim.git",
+  "git://github.com/vim-scripts/rest.vim.git",
+  "git://github.com/vim-scripts/jQuery.git",
+  "git://github.com/vim-scripts/IndexedSearch.git",
+
+
+
   # http://github.com/vim-scripts/Align
   #
   # http://github.com/ervandew/supertab
@@ -44,25 +48,10 @@ git_bundles = [
   # "git://github.com/tpope/vim-repeat.git",
   # "git://github.com/tpope/vim-vividchalk.git",
   # "git://github.com/tsaleh/vim-shoulda.git",
-  # "git://github.com/tsaleh/vim-tcomment.git",
   # "git://github.com/vim-ruby/vim-ruby.git",
 ]
 
-vim_org_scripts = [
-  ['matchit', '8196', 'zip'],
-  ['taglist', '7701', 'zip'],
-  ['yankring', '12258', 'zip'],
-  ['SearchComplete', '1388', 'plugin'],
-  # ['SuperTab', '11853', 'vba'],
-  ['php', '8651', 'tar.gz'],
-  ['pydoc', '13092', 'plugin'],
-  ['searchfold', '9850', 'plugin'],
-  ['tasklist', '10388', 'plugin'],
-  #
-  # ["IndexedSearch", "7062",  "plugin"],
-  # ["gist",          "12732", "plugin"],
-  # ["jquery",        "12107", "syntax"],
-]
+vim_org_scripts = []
 
 require 'fileutils'
 require 'open-uri'
