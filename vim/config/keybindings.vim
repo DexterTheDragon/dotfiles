@@ -11,6 +11,9 @@
 " Fix for legacy vi inconsistency
 map Y y$
 
+" Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w
+
 nnoremap ' `
 nnoremap ` '
 
@@ -43,6 +46,8 @@ map <silent> <F8> :set nospell!<CR>:set nospell?<CR>
 " }}}
 
 " LEADER MAPS {{{
+" map <leader>/ ,c<space> " nerdcommenter
+" <leader>p PhpDoc string
 nmap <silent> <leader>h :silent noh<CR>
 
 " Centers, left, or right-justifies text
