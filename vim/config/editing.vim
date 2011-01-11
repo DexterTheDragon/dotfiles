@@ -58,7 +58,7 @@ au InsertLeave * set list
 
 set switchbuf=useopen           "swb:   Jumps to first window or tab that contains specified buffer instead of duplicating an open window
 set showtabline=1               "stal:  Display the tabbar if there are multiple tabs. Use :tab ball or invoke Vim with -p
-" set hidden                      "hid:   allows opening a new buffer in place of an existing one without first saving the existing one
+set hidden                      "hid:   allows opening a new buffer in place of an existing one without first saving the existing one
 
 set splitright                  "spr:   puts new vsplit windows to the right of the current
 set splitbelow                  "sb:    puts new split windows to the bottom of the current
