@@ -23,6 +23,8 @@ ignorecase on           # case insensitive search in scroll-back mode
 defscrollback 5120      # default scroll-back buffer is tiny. (No. of lines.)
 bufferfile $HOME/.screen_buf
 
+bind ` select 0 # handy
+
 # set the second mark, write to the screen-exchange file, and use xsel to
 # synchronize the paste buffer with the X selection.
 # bindkey > eval "stuff ' '" writebuf "exec sh -c 'xclip -i < /tmp/screen-exchange'"
