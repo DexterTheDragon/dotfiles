@@ -235,6 +235,8 @@ settings = {
     screen_away_message = "went away....";
     screen_away_nick = " ";
     nicklist_automode = "screen";
+    splitlong_line_end = "";
+    splitlong_line_start = "";
   };
   "fe-common/core" = {
     autolog = "yes";
@@ -243,8 +245,10 @@ settings = {
     windows_auto_renumber = "no";
     hilight_color = "%g";
     hilight_act_color = "%R";
+    activity_hide_targets = "&bitlbee";
+    autolog_ignore_targets = "nickserv";
   };
-  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-text" = { actlist_sort = "level"; };
 };
 ignores = (
   { level = "JOINS PARTS QUITS MODES"; servertag = "freenode"; },
@@ -256,11 +260,6 @@ ignores = (
     mask = "bronzedragonrider";
     level = "MODES";
     channels = ( "&bitlbee" );
-  },
-  {
-    mask = "bronzedragonrider";
-    level = "MODES";
-    servertag = "localhost";
   },
   { level = "JOINS PARTS QUITS MODES"; servertag = "di"; }
 );
