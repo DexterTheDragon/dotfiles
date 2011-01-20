@@ -20,7 +20,6 @@ nnoremap ` '
 " FUNCTION KEYS {{{
 " Type <F1> follwed by a buffer number or name fragment to jump to it.
 " Also replaces the annoying help button. Based on tip 821.
-map <F1> :ls<CR>:b<Space>
 
 " <F2> YankRing
 " <F3> TlistToggle
@@ -59,6 +58,8 @@ noremap <silent> ,r :ri <CR>
 nmap <silent> <leader>w :set nowrap!<CR>:set nowrap?<CR>
 
 map <leader>e :py EvaluateCurrentRange()
+
+map <leader>b :ls<CR>:b<Space>
 
 " }}}
 
