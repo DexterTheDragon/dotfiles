@@ -2,6 +2,7 @@ yankring_history_v2.txt
 
 rvm/*
 !rvm/patch*
+!rvm/user/*
 
 ssh/id_rsa*
 ssh/known_hosts
