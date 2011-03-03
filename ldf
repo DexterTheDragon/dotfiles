@@ -12,7 +12,9 @@ doLink() {
         i=`basename $i | sed 's/^\.//g'`
         file=".$i"
         if [ -h "$LINKTO/$file" ]; then
-            echo "$file: already a symlink"
+            if [ $VERBOSE ]; then
+                echo "$file: already a symlink"
+            fi
             continue
         elif [ -f "$LINKTO/$file" -o -d "$LINKTO/$file" ]; then
             echo "$file: file exists"
@@ -108,13 +110,16 @@ ME=`basename $0`
 SCRIPT=$0
 
 action='link';
-while getopts 'hui:t:f:' OPTION
+while getopts 'hui:t:f:vqF' OPTION
 do
     case $OPTION in
     t) LINKTO=$OPTARG ;;
     f) LINKFROM=$OPTARG;;
     u) action='unlink';;
     i) action='install'; file=$OPTARG ;;
+    v) VERBOSE=1 ;;
+    q) QUIET=1 ;;
+    F) FORCE=1 ;;
     h | ?) usage ;;
     esac
 done
