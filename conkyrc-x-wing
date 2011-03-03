@@ -44,7 +44,7 @@ $alignc${color gray}$nodename
 ${alignc}$loadavg
 ${alignc}${color gray}up ${color white}$uptime
 ${hr}
-${color SteelBlue}${font Monaco:bold:size=11}${alignc}${time %H:%M}$font
+${color SteelBlue}${font Monaco:bold:size=11}${alignc}${time %I:%M%p}$font
 ${alignc}${color gray}${time %a, %d %b %y}
 
 $freq_g GHz
