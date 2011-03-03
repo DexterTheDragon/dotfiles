@@ -2,11 +2,31 @@
 # a shell script to manage linking rc files in a directory to your home dir
 
 doLink() {
+    hostspecif=$(find -maxdepth 1 -name "*`hostname`*" -printf "%f\n")
+    for i in $hostspecif; do
+        i=`basename $i | sed 's/^\.//g'`
+        file=".$(basename $i -$(hostname))"
+        if [ -h "$LINKTO/$file" ]; then
+            if [ $VERBOSE ]; then
+                echo "$file: already a symlink"
+            fi
+            continue
+        elif [ -f "$LINKTO/$file" -o -d "$LINKTO/$file" ]; then
+            echo "$file: file exists"
+            continue
+        else
+            echo "Linking $file"
+            cd $LINKTO
+            ln -s "$LINKFROM/$i" $file
+            cd - > /dev/null
+        fi
+    done
+
     if [ -n "$1" ]; then
         files=$1
     fi
     if [ -z "$files" ]; then
-        files=`ls $LINKFROM | grep -v $ME`
+        files=`ls $LINKFROM | grep -v -e $ME -e "-$(hostname)"`
     fi
     for i in $files; do
         i=`basename $i | sed 's/^\.//g'`
