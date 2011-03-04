@@ -26,7 +26,13 @@ if [ -f $dir/ruby_version ]; then
             bundle check > /dev/null
             # update the bundle if needs be
             if [ $? != 0 ]; then
-                bundle install --without osx
+                bundle install
+
+                # rehash zsh so it finds new binaries
+                which rehash > /dev/null
+                if [[ $? == 0 ]]; then
+                    rehash
+                fi
             fi
         fi
     fi
