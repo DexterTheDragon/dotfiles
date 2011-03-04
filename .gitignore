@@ -2,6 +2,7 @@ yankring_history_v2.txt
 
 rvm/*
 !rvm/patch*
+!rvm/gemsets
 !rvm/user/*
 
 ssh/id_rsa*
