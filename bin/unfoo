@@ -1,37 +1,46 @@
 #!/bin/bash
 
-#
+#####################################################################
+# Copyright 2011 Kevin Carter <cartkev@gmail.com>
 # Copyright 2002, 2005, 2006, 2009 Graham Forest <vitaminmoo@wza.us>
 # This script is released under the BSD license
 # If you make any improvements, or even changes,
 # I'd appreciate it if you'd send 'em to me
-# To get the newest version of this script, please
-# visit http://obsoleet.org/code
-#
 #####################################################################
 
-#
+#####################################################################
 # Dependencies:
 # tar, gzip, bzip2, unace, unrar, unzip, 7z, lzma
 # but only if you use them
-#
 #####################################################################
 
-#
-# Bugs, TODO:
-#
-#  o Needs to pass options (like -v) to called programs
-#
-#  o Need to add a which statement with decompressor missing error
-#
-#####################################################################
+# function to auto-detect if we need a subdir
+need_subdir() {
+    count=0;
+    status=0;
+    prev_folder=''
+    while read string; do
+        count=$((count+1))
+        folder=${string:0:$(expr index "$string" '/')}
+        if [ -z $folder ]; then
+            status=1;
+        elif [[ -n $prev_folder && $folder != $prev_folder ]]; then
+            status=1;
+        fi
+        prev_folder=$folder
+    done
+    if [ $count == 1 ]; then
+        echo 0;
+        return 0;
+    else
+        echo $status;
+        return $status;
+    fi
+}
 
-check_success() # Could've written this by myself. Took it
-                # from jsmaby's minimal system's initscript
-                # instead. Thanks jsmaby. - Raphael
-{
+check_success() {
   if [ "$?" == "0" ]; then
-    echo -e " done\007" # Makes a beep when successful. - Raphael
+    echo -e " done\007" # Makes a beep when successful.
   else
     echo -e " failed"
   fi
@@ -53,28 +62,72 @@ for i in "$@"; do
         # No compression at all
         *.tar)
             echo -n "$IAM: Unpacking tarball $ITIS..."
-            tar xf "$i"
+            if [ $(tar ft "$i" | need_subdir) == 1 ]; then
+                dirname=$(basename "$i" .tar)
+                if [ -d "$dirname" ]; then
+                    echo
+                    echo "$IAM: directory '$dirname' already exists... aborting"
+                    exit 1
+                fi
+                mkdir "$dirname"
+                tar -C "$dirname" -xf "$i"
+            else
+                tar xf "$i"
+            fi
             check_success
             ;;
 
         # tar'd and gzip'd or compress'd
-        *.tar.gz|*.tgz|.tar.Z|.tar.z)
+        *.tar.gz|*.tgz|*.tar.Z|*.tar.z)
             echo -n "$IAM: Decompressing and unpacking gzip'd tarball $ITIS..."
-            gzip -dc "$i" | tar xf -
+            if [ $(tar ft "$i" | need_subdir) == 1 ]; then
+                dirname=$(echo $i | sed -r 's/(.tar.gz|.tgz|.tar.Z|.tar.z)$//g')
+                if [ -d "$dirname" ]; then
+                    echo
+                    echo "$IAM: directory '$dirname' already exists... aborting"
+                    exit 1
+                fi
+                mkdir "$dirname"
+                gzip -dc "$i" | tar -C "$dirname" -xf -
+            else
+                gzip -dc "$i" | tar xf -
+            fi
             check_success
             ;;
 
         # tar'd and bzip2'd
         *.tar.bz2|*.tbz2|*.pkg)
             echo -n "$IAM: Decompressing and unpacking bzip'd tarball $ITIS..."
-            bzip2 -dc "$i" | tar xf -
+            if [ $(tar ft "$i" | need_subdir) == 1 ]; then
+                dirname=$(echo $i | sed -r 's/(.tar.bz2|.tbz2|.pkg)$//g')
+                if [ -d "$dirname" ]; then
+                    echo
+                    echo "$IAM: directory '$dirname' already exists... aborting"
+                    exit 1
+                fi
+                mkdir "$dirname"
+                bzip2 -dc "$i" | tar -C "$dirname" -xf -
+            else
+                bzip2 -dc "$i" | tar xf -
+            fi
             check_success
             ;;
 
-        # tar'd and lzma'd, thanks  Michel Lang
+        # tar'd and lzma'd
         *.tar.lzma|*.tlz)
             echo -n "$IAM: Decompressing and unpacking lzma'd tarball $ITIS..."
-            lzma -dc "$i" | tar xf -
+            if [ $(tar ft "$i" | need_subdir) == 1 ]; then
+                dirname=$(echo $i | sed -r 's/(.tar.lzma|.tlz)$//g')
+                if [ -d "$dirname" ]; then
+                    echo
+                    echo "$IAM: directory '$dirname' already exists... aborting"
+                    exit 1
+                fi
+                mkdir "$dirname"
+                lzma -dc "$i" | tar -C "$dirname" -xf -
+            else
+                lzma -dc "$i" | tar xf -
+            fi
             check_success
             ;;
 
@@ -92,7 +145,7 @@ for i in "$@"; do
             check_success
             ;;
 
-        # lzma'd, thanks Michel Lang
+        # lzma'd
         *.lzma)
             echo -n "Decompressing lzma archive $ITIS...";
             lzma -dc "$i" > `basename "$i" .lzma`
@@ -102,13 +155,19 @@ for i in "$@"; do
         # Packed with (Win)ACE
         *.ace)
             echo -n "$IAM: Unpacking WinACE archive $ITIS..."
-            unace x "$i"
+            if [ $(unace l mobile-pack.ace | grep % | awk '{for (i=6; i<=NF; i++) { printf("%s ", $i); printf("\n") } }' | need_subdir) == 1 ]; then
+                dirname=$(basename "$i" .ace)
+                unace x "$i" $dirname/
+            else
+                unace x "$i"
+            fi
             check_success
             ;;
 
         # Packed with (Win)RAR
         *.rar)
             echo -n "$IAM: Unpacking WinRAR archive $ITIS..."
+            # x does subfolder detection??
             unrar x "$i"
             check_success
             ;;
@@ -116,10 +175,15 @@ for i in "$@"; do
         # Classically zipped
         *.zip)
             echo -n "$IAM: Unpacking pkzip archive $ITIS..."
-            unzip "$i"
+            if [ $(zipinfo -1 "$i" | need_subdir) == 1 ]; then
+                dirname=$(basename "$i" .zip)
+                unzip -d "$dirname" "$i"
+            else
+                unzip "$i"
+            fi
             check_success
             ;;
-        # Packed with 7zip, thanks Komoto
+        # Packed with 7zip
         *.7z)
             echo -n"$IAM: Unpacking 7zip archive $ITIS..."
             7z x "$i"
