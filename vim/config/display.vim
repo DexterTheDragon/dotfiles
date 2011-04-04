@@ -14,6 +14,7 @@ set sidescrolloff=2             "siso:  places a couple columns between the curr
 set laststatus=2                "ls:    makes the status bar always visible
 set ttyfast                     "tf:    improves redrawing for newer computers
 set viminfo='100,f1,:100,/100   "vi:    For a nice, huuuuuge viminfo file
+set history=100                 " save the last 100 commands/search terms
 
 if &columns == 80
     " If we're on an 80-char wide term, don't display these screen hogs

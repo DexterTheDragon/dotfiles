@@ -33,6 +33,9 @@ git_bundles = [
   "git://github.com/vim-scripts/jQuery.git",
   "git://github.com/vim-scripts/IndexedSearch.git",
 
+  "git://github.com/juvenn/mustache.vim.git",
+
+  "git://github.com/altercation/vim-colors-solarized.git",
 
 
   # http://github.com/vim-scripts/Align
@@ -51,6 +54,7 @@ git_bundles = [
   # "git://github.com/tsaleh/vim-shoulda.git",
   # "git://github.com/vim-ruby/vim-ruby.git",
   # "git://github.com/vim-scripts/a.vim.git",
+  "git://github.com/duff/vim-bufonly.git",
 ]
 
 vim_org_scripts = []
