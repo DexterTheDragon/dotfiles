@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+# mpc playlist wrapper, tested with mpc 0.18.
+# License: GPLv3, see http://www.gnu.org/licenses/gpl.txt
+
+use warnings;
+use strict;
+
+my $num = undef;
+if ( $ARGV[0] ) {
+    $num = $ARGV[0]
+}
+
+my $song = 0;
+open(SONG, "mpc status |");
+while(<SONG>) {
+    #if(/\^+\] #(\d+)/) {
+    if(/#(\d+)/) {
+        $song = $1;
+    }
+}
+
+#die unless defined($song);
+my $n = 0;
+my $start = 0;
+my $i = 0;
+open(PLAYLIST, "mpc playlist |");
+while(<PLAYLIST>) {
+    $n++;
+    if($n==$song) {
+        if ( not defined $num ) {
+            printf "\e[31;2m> %3d %s\e[31;0m", $n, $_;
+        }
+        $start = 1;
+    } else {
+        if ( defined $num ) {
+            if ( $start && $i < $num ) {
+                printf "  %3d %s", $n, $_;
+                $i++;
+            } else {
+                next;
+            }
+        } else {
+            printf "  %3d %s", $n, $_;
+        }
+    };
+}

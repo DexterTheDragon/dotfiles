@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -f .passenger_port ]; then
+    if [ ! `which passenger` ]; then
+        echo 'passenger not installed'
+        gem install passenger
+    fi
+
+    passenger status -p $(cat .passenger_port) | grep 'not running' > /dev/null
+    if [ $? == 0 ]; then
+        passenger start -p $(cat .passenger_port) -d
+    else
+        echo 'Passenger already running'
+    fi
+else
+    echo 'No port file'
+    list=`netstat -lpn --inet 2>/dev/null | grep passenger | awk '{print $4}' | awk -F: '{print $2}'`
+    for i in `seq 8001 8009`; do
+        echo -n ''
+    done
+fi
+
+# netstat -lpn --inet
