@@ -33,11 +33,11 @@ alias podcatcher='podcatcher --options ~/.podcatcher.yaml'
 
 alias bush='bundle exec $SHELL && echo "Exiting bundle exec"'
 
-alias htop='TERM=xterm htop'
-
 alias murder='kill -9'
 
 alias cap='cap -p'
+alias mv='mv -i'
+alias jobs='jobs -l'
 
 # Python development helpers {{{
 alias pyhttp='python -m SimpleHTTPServer'
