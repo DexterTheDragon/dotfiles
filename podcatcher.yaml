@@ -9,7 +9,7 @@ dir: ".podcatcher"
 cachedir: "/home/kevin/podcasts"
 
 # Size of content cache in megabytes
-size: 512
+size: 1000
 
 # Download strategy
 strategy: chron
@@ -71,7 +71,7 @@ function: download
 
 # The number of content downloads to be remembered, in order to avoid
 # downloading them again
-memsize: 2000
+memsize: 5000
 
 # Directory for storing torrent files, when using an external BitTorrent client
 #torrentdir: "/home/user/torrents"
