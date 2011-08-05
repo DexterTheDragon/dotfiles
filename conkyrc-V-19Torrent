@@ -1,0 +1,221 @@
+# conky configuration
+# modifications done by Heartsbane
+
+# set to yes if you want Conky to be forked in the background
+background yes
+
+# X font when Xft is disabled, you can pick one with program xfontsel
+#font 5x7
+#font 6x10
+#font 7x13
+#font 8x13
+#font 9x15
+#font *mintsmild.se*
+#font -*-*-*-*-*-*-34-*-*-*-*-*-*-*
+
+# Use Xft?
+use_xft yes
+
+# Xft font when Xft is enabled
+#xftfont Bitstream Vera Sans Mono:size=9
+#xftfont Terminus:size=9
+xftfont Liberation Mono:size=8
+#xftfont Liberation Mono:size=9
+#xftfont DS9cr:size=9
+#xftfont Zekton:style:Italics:size=10
+
+# Text alpha when using Xft
+xftalpha 0.8
+
+# Update interval in seconds
+update_interval 2
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+#minimum_size 300 0
+maximum_width 315
+
+# Draw shades?
+draw_shades yes
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders no
+draw_graph_borders yes
+
+# Stippled borders?
+stippled_borders 8
+
+# border margins
+border_inner_margin 4
+
+# border width
+border_width 1
+
+# Default colors and also border colors
+default_color white
+default_shade_color black
+default_outline_color white
+
+# own window options
+own_window              yes
+own_window_transparent  yes
+own_window_type         normal
+# own_windown_type      normal
+own_window_hints        undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Text alignment, other possible values are commented
+alignment top_left
+# alignment top_right
+# alignment bottom_left
+# alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 10
+gap_y 50
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer left
+
+# colours
+#White (duh)
+color1 white
+# light blue
+color2 SteelBlue
+# medium blue
+color3 4322a8
+# dark blue
+color4 221154
+# yellow
+color5 gray
+# Tan
+color6 cbc0a2
+#light sky Blue
+color7 66ccff
+# red other blue
+color8 4387a8
+# orange
+color9 fc8820
+
+text_buffer_size 1024
+
+if_up_strictness link
+
+# variable is given either in format $variable or in ${variable}. Latter
+# allows characters right after the variable and must be used in network
+# stuff because of an argument
+
+# stuff after 'TEXT' will be formatted on screen
+
+
+TEXT
+${font arial black:size=11}${alignc}${color7} ${time %I:%M%p %a, %b %d, %Y} ${font}
+${color2}${font StyleBats:style=CleanCut:size=10}System${font} ${hr 2}${color}
+${font arial black:size=8} $machine $sysname $kernel on ${color7}$nodename ${font}
+${font arial black:size=8} ${color7}Uptime: ${color1}$uptime  ${color7}Load: ${color1}$loadavg ${font}
+${font arial black:size=8} ${color7}CPU Speed: ${color1}${freq_g cpu0} GHz  ${color7}Temp: ${color1}${acpitemp}C  ${color7}Users: ${color1}$user_number${font}
+
+${color1}${alignr}${cpugraph normal 70,310 4387A8 BB2B2B -t}
+${voffset -79}${color7} CPU Usage:${color1}${cpu}% ${alignr}PID      CPU%     MEM%
+${color9} ${top name 1}${alignr}${top pid 1}   ${top cpu 1}   ${top mem 1}
+${color1} ${top name 2}${alignr}${top pid 2}   ${top cpu 2}   ${top mem 2}
+${color1} ${top name 3}${alignr}${top pid 3}   ${top cpu 3}   ${top mem 3}
+${color1} ${top name 4}${alignr}${top pid 4}   ${top cpu 4}   ${top mem 4}
+
+${alignr}${memgraph normal 70,310 4387A8 BB2B2B -t}
+${voffset -79}${color7} Mem:${color1}${memperc}% ${membar 6,80} ${color7}Swap:${color1}${swapperc}% ${swapbar 6,80}
+${color9} ${top_mem name 1}${alignr}${top_mem pid 1}   ${top_mem cpu 1}   ${top_mem mem 1}
+${color1} ${top_mem name 2}${alignr}${top_mem pid 2}   ${top_mem cpu 2}   ${top_mem mem 2}
+${color1} ${top_mem name 3}${alignr}${top_mem pid 3}   ${top_mem cpu 3}   ${top_mem mem 3}
+${color1} ${top_mem name 4}${alignr}${top_mem pid 4}   ${top_mem cpu 4}   ${top_mem mem 4}
+
+${color2}${font StyleBats:style=CleanCut:size=10}Hard Disks${font} ${hr 2}
+${color1}${alignr}${diskiograph 70,310 4387A8 BB2B2B -t} ${voffset -79}
+ ${color6}/root   ${color1}${fs_used /}/${fs_size /} ${fs_used_perc /}%
+ ${fs_bar 5,305 /}
+ ${color6}/home   ${color1}${fs_used /home}/${fs_size /home} ${fs_used_perc /home}%
+ ${fs_bar 5,305 /home}
+
+# ${color2}${font StyleBats:style=CleanCut:size=10}Mail${font} ${hr 2}
+# ${alignc}${color1}${execi 600 conkyEmail --servertype=IMAP --servername=imap.gmail.com --ssl --username=tsharpe --password=**********} Unread @ gmail.com
+# ${alignc}${color1}${execi 600 conkyEmail --servertype=IMAP --servername=mail.xmission.com --ssl --username=tsharpe --password=***********} Unread @ xmission.com
+
+${color2}${font StyleBats:style=CleanCut:size=10}Networking: ${hr 2}${font}
+#${if_up eth1}${color7}Wireless (eth1) ${hr 1}
+# ${color6}ESSID: ${color1}${wireless_essid eth1} ${alignr}${color6}Local IP: ${color1}${addr eth1}
+# ${color6}Bitrate: ${color1}${wireless_bitrate eth1}${alignr}${color6}Signal STR: ${color1}${wireless_link_qual_perc eth1}%
+# ${color6}Total Down: ${color1}${totaldown eth1} ${alignr}${color6}Total Up: ${color1}${totalup eth1}
+# ${color6}Down Speed: ${color1}${downspeed eth1} k/s ${alignr}${color6}Up Speed: ${color1}${upspeed eth1} k/s
+# ${color1}${downspeedgraph eth1 40,150 789E2D fc8820} $alignr${color1}${upspeedgraph eth1 40,150 789E2D fc8820}${else}${voffset -15}${endif}
+${if_up eth0}${color7}Wired (eth0)  ${alignr}${color6}Local IP: ${color1}${addr eth0}
+ ${color1}${downspeedgraph eth0 40,150 4387A8 BB2B2B -t} $alignr${color1}${upspeedgraph eth0 40,150 4387A8 BB2B2B -t}${else}${voffset -15}${endif}
+ ${voffset -49}${color7}Total Down: ${color1}${totaldown eth0} ${alignr}${color7}Total Up: ${color1}${totalup eth0}
+ ${color7}Down Speed: ${color1}${downspeed eth0}/s ${alignr}${color7}Up Speed: ${color1}${upspeed eth0}/s
+${if_up tun0}${color7}VPN (tun0)  ${alignr}${color6}Local IP: ${color1}${addr tun0}
+ ${color6}Total Down: ${color1}${totaldown tun0} ${alignr}${color6}Total Up: ${color1}${totalup tun0}
+ ${color6}Down Speed: ${color1}${downspeed tun0}/s ${alignr}${color6}Up Speed: ${color1}${upspeed tun0}/s
+ ${color1}${downspeedgraph tun0 40,150 789E2D fc8820} $alignr${color1}${upspeedgraph tun0 40,150 789E2D fc8820}${else}${voffset -15}${endif}
+
+# ${color7}Port(s) / Connections: ${hr}
+# ${color6}Outbound Connection ${alignr} Remote Service/Port${color1}
+# ${tcp_portmon 1 65535 rhost 0} ${alignr} ${tcp_portmon 1 65535 rservice 0}
+# ${tcp_portmon 1 65535 rhost 1} ${alignr} ${tcp_portmon 1 65535 rservice 1}
+# ${tcp_portmon 1 65535 rhost 2} ${alignr} ${tcp_portmon 1 65535 rservice 2}
+# ${tcp_portmon 1 65535 rhost 3} ${alignr} ${tcp_portmon 1 65535 rservice 3}
+# ${tcp_portmon 1 65535 rhost 4} ${alignr} ${tcp_portmon 1 65535 rservice 4}
+# ${tcp_portmon 1 65535 rhost 5} ${alignr} ${tcp_portmon 1 65535 rservice 5}
+# ${tcp_portmon 1 65535 rhost 6} ${alignr} ${tcp_portmon 1 65535 rservice 6}
+# ${tcp_portmon 1 65535 rhost 7} ${alignr} ${tcp_portmon 1 65535 rservice 7}
+# ${tcp_portmon 1 65535 rhost 8} ${alignr} ${tcp_portmon 1 65535 rservice 8}
+# ${tcp_portmon 1 65535 rhost 9} ${alignr} ${tcp_portmon 1 65535 rservice 9}
+# ${tcp_portmon 1 65535 rhost 10} ${alignr} ${tcp_portmon 1 65535 rservice 10}
+# ${tcp_portmon 1 65535 rhost 11} ${alignr} ${tcp_portmon 1 65535 rservice 11}
+# ${tcp_portmon 1 65535 rhost 12} ${alignr} ${tcp_portmon 1 65535 rservice 12}
+# ${tcp_portmon 1 65535 rhost 13} ${alignr} ${tcp_portmon 1 65535 rservice 13}
+# ${tcp_portmon 1 65535 rhost 14} ${alignr} ${tcp_portmon 1 65535 rservice 14}
+# ${tcp_portmon 1 65535 rhost 15} ${alignr} ${tcp_portmon 1 65535 rservice 15}
+# ${tcp_portmon 1 65535 rhost 16} ${alignr} ${tcp_portmon 1 65535 rservice 16}
+# ${tcp_portmon 1 65535 rhost 17} ${alignr} ${tcp_portmon 1 65535 rservice 17}
+# ${tcp_portmon 1 65535 rhost 18} ${alignr} ${tcp_portmon 1 65535 rservice 18}
+# ${tcp_portmon 1 65535 rhost 19} ${alignr} ${tcp_portmon 1 65535 rservice 19}
+
+${if_mpd_playing}${color2}${font StyleBats:style=CleanCut:size=10}MPD: ${hr 2}${font}${color}
+ ${mpd_artist}
+ $mpd_album
+ $mpd_title
+ $mpd_status ${alignc}ran:$mpd_random rep:$mpd_repeat ${alignr}[${mpd_elapsed}/${mpd_length}]
+ ${mpd_bar}
+ Volume: ${mixer Master}
+
+${texeci 180 ~/.bin/mpc-show-playlist 5}${endif}
+${color2}${font StyleBats:style=CleanCut:size=10}Weather: ${hr 2}${font}${color}
+${texeci 7200 ~/.bin/weather.py}
