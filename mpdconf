@@ -1,0 +1,26 @@
+music_directory "~/podcasts"
+playlist_directory "~/.mpd/playlists"
+db_file "~/.mpd/database"
+log_file "~/.mpd/mpd.log"
+pid_file "~/.mpd/mpd.pid"
+state_file "~/.mpd/mpd.state"
+
+bind_to_address "0.0.0.0"
+
+audio_output {
+    type "alsa"
+    name "My ALSA Device"
+    # device "hw:0,0" # optional
+    # format "44100:16:2" # optional
+}
+
+# http://192.168.178.5:8000/mpd.mp3
+audio_output {
+    type "httpd"
+    name "My HTTP Stream"
+    encoder "lame" # optional, vorbis or lame
+    port "8008"
+    # quality "5.0" # do not define if bitrate is defined
+    bitrate "128" # do not define if quality is defined
+    format "44100:16:1"
+}

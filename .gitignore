@@ -12,3 +12,5 @@ ssh/known_hosts
 
 irssi/away.log
 irssi/fnotify
+
+mpd/database
