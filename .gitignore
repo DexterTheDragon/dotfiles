@@ -1,4 +1,6 @@
 yankring_history_v2.txt
+vim/bundle/
+vim/.netrwhist
 
 rvm/*
 !rvm/patch*
@@ -7,3 +9,6 @@ rvm/*
 
 ssh/id_rsa*
 ssh/known_hosts
+
+irssi/away.log
+irssi/fnotify
