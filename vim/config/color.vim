@@ -3,6 +3,7 @@ syntax on                       "syn:   syntax highlighting
 
 " set t_Co=16
 " color xoria256
+let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
 

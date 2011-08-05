@@ -1,3 +1,4 @@
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.'`^<>[]\""
 " Line Wrap {{{
 
 set backspace=indent,eol,start  "bs:    allows you to backspace over the listed character types

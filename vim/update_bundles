@@ -55,6 +55,9 @@ git_bundles = [
   # "git://github.com/vim-ruby/vim-ruby.git",
   # "git://github.com/vim-scripts/a.vim.git",
   "git://github.com/duff/vim-bufonly.git",
+  "git://github.com/vim-scripts/RunView.git",
+  "git://github.com/vim-scripts/ack.vim.git",
+  "git://github.com/vim-scripts/ShowMarks.git",
 ]
 
 vim_org_scripts = []
