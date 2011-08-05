@@ -1,9 +1,9 @@
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
+IRB.conf[:PROMPT] ||= {}
 if IRB.conf[:PROMPT].include? :RVM
   IRB.conf[:PROMPT_MODE] = :RVM
 elsif
-  IRB.conf[:PROMPT] ||= {}
   IRB.conf[:PROMPT][:MINE] = {
     :PROMPT_I => "%03n:%i:> ",
     :PROMPT_S => "%03n:%i:%l ",
@@ -135,6 +135,8 @@ if ENV.include?('RAILS_ENV') || defined?(Rails)
   end
 
 end
+
+RUBY_PATCHLEVEL = 0 if not defined? RUBY_PATCHLEVEL
 
 ## Notify us of the version and that it is ready.
 puts "Ruby #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL} (#{RUBY_RELEASE_DATE}) #{RUBY_PLATFORM}"
