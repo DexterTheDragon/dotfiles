@@ -15,3 +15,4 @@
 
 .rake_tasks
 .cap_tasks
+.passenger_port
