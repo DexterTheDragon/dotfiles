@@ -5,3 +5,4 @@ wirble
 ruby-debug
 capistrano
 capistrano-ext
+passenger

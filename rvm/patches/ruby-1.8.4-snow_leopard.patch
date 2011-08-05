@@ -1,0 +1,28 @@
+diff -rupN original/ext/openssl/openssl_missing.h new/ext/openssl/openssl_missing.h
+--- /ext/openssl/openssl_missing.h	2005-04-15 13:16:18.000000000 -0600
++++ /ext/openssl/openssl_missing.h	2009-12-14 23:12:49.000000000 -0700
+@@ -116,8 +116,8 @@ int X509_CRL_add0_revoked(X509_CRL *crl,
+ int BN_mod_sqr(BIGNUM *r, const BIGNUM *a, const BIGNUM *m, BN_CTX *ctx);
+ int BN_mod_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx);
+ int BN_mod_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx);
+-int BN_rand_range(BIGNUM *r, BIGNUM *range);
+-int BN_pseudo_rand_range(BIGNUM *r, BIGNUM *range);
++// int BN_rand_range(BIGNUM *r, BIGNUM *range);
++// int BN_pseudo_rand_range(BIGNUM *r, BIGNUM *range);
+ char *CONF_get1_default_config_file(void);
+ int PEM_def_callback(char *buf, int num, int w, void *key);
+
+diff -rupN original/ext/readline/readline.c new/ext/readline/readline.c
+--- /ext/readline/readline.c	2005-10-30 11:20:53.000000000 -0700
++++ /ext/readline/readline.c	2010-03-17 13:42:07.000000000 -0600
+@@ -704,8 +704,8 @@ username_completion_proc_call(self, str)
+     char **matches;
+     int i;
+
+-    matches = rl_completion_matches(StringValuePtr(str),
+-				    rl_username_completion_function);
++    // matches = rl_completion_matches(StringValuePtr(str),
++    // 				    rl_username_completion_function);
+     if (matches) {
+ 	result = rb_ary_new();
+ 	for (i = 0; matches[i]; i++) {

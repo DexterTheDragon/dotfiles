@@ -1,1 +1,2 @@
+# User settings, overrides db settings and persists across installs.
 rubygems_version=1.5.3

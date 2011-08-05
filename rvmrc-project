@@ -35,6 +35,7 @@ if [ -f $dir/ruby_version ]; then
                 fi
             fi
         fi
+        passbootstrap
     fi
 fi
 
