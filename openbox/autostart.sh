@@ -7,3 +7,4 @@ xsetroot -solid "#303030" &
 docker &
 # volwheel &
 conky &
+xscreensaver -no-splash &

@@ -196,11 +196,6 @@
         <execute>amixer set Master toggle</execute>
       </action>
     </keybind>
-    <keybind key="W-p">
-      <action name="Execute">
-        <execute>mpc toggle</execute>
-      </action>
-    </keybind>
     <keybind key="XF86AudioNext">
       <action name="Execute">
         <execute>mpc next</execute>
@@ -220,6 +215,26 @@
       <action name="Execute">
         <execute>mpc stop</execute>
       </action>
+    </keybind>
+    <keybind key="W-p">
+      <action name="Execute">
+        <execute>mpc toggle</execute>
+      </action>
+    </keybind>
+    <keybind key="W-period">
+      <action name="Execute">
+        <execute>mpc next</execute>
+      </action>
+    </keybind>
+    <keybind key="W-comma">
+      <action name="Execute">
+        <execute>mpc prev</execute>
+      </action>
+    </keybind>
+    <keybind key="W-l">
+        <action name="Execute">
+            <execute>xscreensaver-command -lock</execute>
+        </action>
     </keybind>
     <keybind key="Menu">
       <action name="ShowMenu">
