@@ -56,6 +56,7 @@ zstyle ':completion:*' list-colors "$LS_COLORS"
 zstyle -e ':completion:*:(ssh|sssh|scp|sshfs|ping|telnet|ftp|rsync):*' hosts 'reply=(${=${${(M)${(f)"$(<~/.ssh/config)"}:#Host*}#Host }:#*\**})'
 
 source ~/.rake_completion.zsh
+source ~/.zsh_functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # }}}
 # {{{ prompt and theme
