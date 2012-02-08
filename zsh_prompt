@@ -86,7 +86,7 @@ function set_prompt() {
     infoline+=( "%~${reset} " )
 
     # show disk space
-    space=$(df -P ./ | grep -v Filesystem)
+    space=$(command df -h -P ./ | grep -v Filesystem)
     infoline+=( "D:$(echo $space | awk '{print $5}')% ($(echo $space | awk '{print $4}')/$(echo $space | awk '{print $2}')) " )
 
     # I want to know my battery percentage when running on battery power
