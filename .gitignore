@@ -14,3 +14,7 @@ irssi/away.log
 irssi/fnotify
 
 mpd/database
+mpd/mpd-error.log
+mpd/mpd.log
+mpd/mpd.pid
+mpd/mpd.state
