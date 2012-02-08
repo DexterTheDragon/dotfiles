@@ -54,9 +54,11 @@ autoload -U compinit
 compinit -C
 zstyle ':completion:*' list-colors "$LS_COLORS"
 zstyle -e ':completion:*:(ssh|sssh|scp|sshfs|ping|telnet|ftp|rsync):*' hosts 'reply=(${=${${(M)${(f)"$(<~/.ssh/config)"}:#Host*}#Host }:#*\**})'
+zstyle ':completion:*:*:git:*' user-commands ${${(M)${(k)commands}:#git-*}/git-/}
 
 source ~/.rake_completion.zsh
 source ~/.zsh_functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.rvm/scripts/zsh/Completion/_rvm
 
 # }}}
 # {{{ prompt and theme
@@ -154,3 +156,5 @@ fi
 # EOF
 # rvm installer added line:
 if [ -s ~/.rvm/scripts/rvm ] ; then source ~/.rvm/scripts/rvm ; fi
+fpath=(~/.rvm/scripts/zsh/Completion/ $fpath)
+fpath=(~/.zsh/Completion $fpath)
