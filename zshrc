@@ -58,14 +58,18 @@ zstyle ':completion:*:*:git:*' user-commands ${${(M)${(k)commands}:#git-*}/git-/
 
 source ~/.rake_completion.zsh
 source ~/.zsh_functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.pip_completion.zsh
 # source ~/.rvm/scripts/zsh/Completion/_rvm
 
 # }}}
 # {{{ prompt and theme
 
 # Set vi-mode and create a few additional Vim-like mappings
-# bindkey -v
-# bindkey "^?" backward-delete-char
+bindkey -v
+bindkey "^?" backward-delete-char
+bindkey '\e[H' beginning-of-line
+bindkey '\e[F' end-of-line
+bindkey '\e[3~' delete-char
 # bindkey -M vicmd "^R" redo
 # bindkey -M vicmd "u" undo
 # bindkey -M vicmd "ga" what-cursor-position
@@ -75,9 +79,9 @@ source ~/.zsh_functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # bindkey -M vicmd '^n' history-beginning-search-forward
 
 # Allows editing the command line with an external editor
-# autoload edit-command-line
-# zle -N edit-command-line
-# bindkey -M vicmd "v" edit-command-line
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd "v" edit-command-line
 
 # autoload -U promptinit
 # promptinit
@@ -156,5 +160,6 @@ fi
 # EOF
 # rvm installer added line:
 if [ -s ~/.rvm/scripts/rvm ] ; then source ~/.rvm/scripts/rvm ; fi
+if [ -s /usr/local/bin/virtualenvwrapper.sh ] ; then source /usr/local/bin/virtualenvwrapper.sh ; fi
 fpath=(~/.rvm/scripts/zsh/Completion/ $fpath)
 fpath=(~/.zsh/Completion $fpath)
