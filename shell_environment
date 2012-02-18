@@ -53,3 +53,8 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 
 # export RUBYOPT='rubygems'
 export CHEF_CLIENT_NAME=kcarter
+
+export WORKON_HOME=~/.virtualenvs
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--distribute'
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_REQUIRE_VIRTUALENV=true
