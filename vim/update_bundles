@@ -36,6 +36,7 @@ git_bundles = [
   "git://github.com/juvenn/mustache.vim.git",
 
   "git://github.com/altercation/vim-colors-solarized.git",
+  # "git://github.com/vim-scripts/LaTeX-Suite-aka-Vim-LaTeX.git",
 
 
   # http://github.com/vim-scripts/Align
@@ -57,7 +58,9 @@ git_bundles = [
   "git://github.com/duff/vim-bufonly.git",
   "git://github.com/vim-scripts/RunView.git",
   "git://github.com/vim-scripts/ack.vim.git",
-  "git://github.com/vim-scripts/ShowMarks.git",
+  # "git://github.com/vim-scripts/ShowMarks.git",
+  'git://github.com/vim-scripts/ri-browser.git',
+  'git://github.com/mileszs/apidock.vim.git',
 ]
 
 vim_org_scripts = []
@@ -75,14 +78,18 @@ bundles_dir = File.join(File.dirname(__FILE__), "bundle")
 FileUtils.mkdir_p(bundles_dir) unless File.exist?(bundles_dir)
 FileUtils.cd(bundles_dir)
 
-puts "Trashing everything (lookout!)"
-Dir["*"].each {|d| FileUtils.rm_rf d }
+if ARGV[0] == '--all'
+  puts "Trashing everything (lookout!)"
+  Dir["*"].each {|d| FileUtils.rm_rf d }
+end
 
 git_bundles.each do |url|
   dir = url.split('/').last.sub(/\.git$/, '')
-  puts "  Unpacking #{url} into #{dir}"
-  `git clone #{url} #{dir}`
-  FileUtils.rm_rf(File.join(dir, ".git"))
+  if ARGV[0] == '--all' or not File.exists?(dir)
+    puts "  Unpacking #{url} into #{dir}"
+    `git clone #{url} #{dir}`
+    FileUtils.rm_rf(File.join(dir, ".git"))
+  end
 end
 
 vim_org_scripts.each do |name, script_id, script_type|
