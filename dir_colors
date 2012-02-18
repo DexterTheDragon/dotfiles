@@ -118,6 +118,7 @@ EXEC 01;33
 .cpio 00;38;5;61
 .7z   00;38;5;61
 .rz   00;38;5;61
+.xz   00;38;5;61
 # image formats
 .jpg  01;35
 .JPG  01;35
@@ -145,6 +146,7 @@ EXEC 01;33
 .yuv  01;35
 # video formats
 .avi  00;35
+.divx 00;35
 .mov  00;35
 .mpg  00;35
 .mpeg 00;35
