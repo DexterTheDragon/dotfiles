@@ -1,38 +1,20 @@
 # vim:ft=zsh
 # list contents right after changing directories
-cd() {
-    # check if were in a bundle and exit if we are going above the project root
-    if [ "$BUNDLE_GEMFILE" ]; then
-        if [ "$1" ]
-            then PATHTO=$1
-            else PATHTO=~
-        fi
-        if [ $(expr match "$PATHTO" "/") != 1 ]; then
-            PATHTO="$(pwd)/$PATHTO"
-        fi
-        PROJECTPATH=$(dirname $BUNDLE_GEMFILE)
-        if [ $(expr match "$PATHTO" "$PROJECTPATH") != ${#PROJECTPATH} ]; then
-            echo "WARNING: STILL IN BUNDLE"
-            exit
-        fi
-    fi
-
+my_cd() {
     if [ "$1" ]
     then builtin cd "$1" && ls
     else builtin cd && ls
     fi
-    declare -f  __rvm_project_rvmrc > /dev/null
-    if [ $? -eq 0 ]; then
-         __rvm_project_rvmrc
-    fi
 }
+
+alias cd=my_cd
 
 # ..(), ...() for quickly changing $CWD {{{1
 # http://www.shell-fu.org/lister.php?id=769
 
 # Go up n levels:
 # .. 3
-function .. (){
+function .. () {
     local arg=${1:-1};
     local dir=""
     while [ $arg -gt 0 ]; do
@@ -60,11 +42,11 @@ function ... (){
 }
 # }}}
 
-spell (){
+spell() {
     echo $1 | aspell -a
 }
 
-function sa {
+sa() {
     eval file=\$$#
     SSHADD=$(which ssh-add)
     if [ -f ~/.ssh/$file ]; then
@@ -101,7 +83,7 @@ itunespodcast() {
 ml() { (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2=$4="";1') | column -t; }
 
 #intercept calls to svn
-svn () {
+svn() {
     #bail if the user didnt specify which subversion command to invoke
     if [ $# -lt 1 ]; then
         command svn
@@ -131,3 +113,58 @@ svn () {
 reloaddb() {
     mysqladmin -f drop $1 && mysqladmin create $1 && zcat $2 | mysql $1
 }
+
+# modified from rvm
+# Checks the .venv for the given directory. Note that if
+# argument is passed, it will be used instead of pwd.
+venv_project()
+{
+    export __venv_project_lock
+    : __venv_project_lock:${__venv_project_lock:=0}
+    : __venv_project_lock:$((__venv_project_lock+=1))
+    if (( __venv_project_lock > 1 ))
+    then return 0 # no nesting
+    fi
+
+    typeset working_dir
+
+    # Get the first argument or the pwd.
+    working_dir="${1:-"$PWD"}"
+
+    while :
+    do
+        if [[ -z "$working_dir" || "$HOME" == "$working_dir" || "/" == "$working_dir" ]]
+        then
+            if [[ -n "${current_venv:-""}" ]]
+            then
+                deactivate
+                if [[ -n "${venv_previous_environment:-""}" ]]
+                then
+                    workon "$venv_previous_environment"
+                fi
+                unset current_venv venv_previous_environment
+            fi
+            break
+        else
+            if [[ -f "$working_dir/.venv" ]]
+            then
+                if [[ "${current_venv:-""}" != "$working_dir/.venv" ]]
+                then
+                    venv_previous_environment="$(basename ${VIRTUAL_ENV:-""})"
+                    current_venv="$working_dir/.venv"
+                    workon $(cat $current_venv)
+                    unset __venv_project_lock
+                    return 0
+                fi
+                break
+            else
+                working_dir="$(dirname "$working_dir")"
+            fi
+        fi
+    done
+
+    unset __venv_project_lock
+    return $?
+}
+
+chpwd_functions=( "${chpwd_functions[@]}" venv_project)
