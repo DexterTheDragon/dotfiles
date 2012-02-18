@@ -1,4 +1,5 @@
 [alias]
+    fileschanged = !sh -c 'git log --reverse --name-status HEAD..."$1" | grep -e [MAD][[:space:]]' -
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset (%aN <%aE>)' --abbrev-commit --date=relative
 [color]
     branch = auto
@@ -7,8 +8,11 @@
     showbranch = auto
     status = auto
 [core]
+    attributesfile = ~/.gitattributes
     excludesfile = ~/.gitexcludes
     pager = less -FRSX
+[diff "exif"]
+	textconv = exiftool
 [merge]
     tool = vimdiff
 [push]
