@@ -1,3 +1,4 @@
+term screen-256color
 # ------------------------------------------------------------------------------
 #                                  MESSAGES
 # ------------------------------------------------------------------------------
@@ -37,12 +38,12 @@ bind ` select 0 # handy
 # ------------------------------------------------------------------------------
 #                               DEFAULT WINDOWS
 # ------------------------------------------------------------------------------
-screen -t irssi
-screen -t rtorrent
-screen -t tircd
-screen -t main
-select 0
-monitor on # monitor the irssi window by default
+# screen -t irssi
+# screen -t rtorrent
+# screen -t tircd
+# screen -t main
+# select 0
+# monitor on # monitor the irssi window by default
 
 # ------------------------------------------------------------------------------
 #                               NESTED SCREENS
