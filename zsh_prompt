@@ -14,6 +14,7 @@ green="%{$fg_bold[green]%}"
 red="%{$fg[red]%}"
 b_red="%{$fg_bold[red]%}"
 yellow="%{$fg[yellow]%}"
+b_yellow="%{$fg_bold[yellow]%}"
 blue="%{$fg_bold[blue]%}"
 
 zstyle ':vcs_info:*' enable git svn
@@ -85,27 +86,35 @@ function set_prompt() {
     [[ -w $PWD ]] && infoline+=( ${blue} ) || infoline+=( ${b_red} )
     infoline+=( "%~${reset} " )
 
-    # show disk space
-    space=$(command df -h -P ./ | grep -v Filesystem)
-    infoline+=( "D:$(echo $space | awk '{print $5}')% ($(echo $space | awk '{print $4}')/$(echo $space | awk '{print $2}')) " )
-
     # I want to know my battery percentage when running on battery power
-    if which ibam &> /dev/null; then
-        local BATTSTATE="$(ibam --percentbattery)"
-        local BATTPRCNT="${BATTSTATE[(f)1][(w)-2]}"
-        local BATTTIME="${BATTSTATE[(f)2][(w)-1]}"
-        PR_BATTERY="B:${BATTPRCNT}%% (${BATTTIME}) "
-        if [[ "${BATTPRCNT}" -lt 15 ]]; then
-            PR_BATTERY="${PR_BOLD_RED}${PR_BATTERY}"
+    if which acpi &> /dev/null; then
+        # local BATTSTATE="$(ibam --percentbattery)"
+        # local BATTSTATE="$(acpi -b)"
+        # local BATTPRCNT="${BATTSTATE[(f)1][(w)-2]}"
+        local BATTPRCNT="$(acpi -b | awk '{print $4}' | cut -d% -f1)"
+        # local BATTTIME="${BATTSTATE[(f)2][(w)-1]}"
+        local BATTTIME="$(acpi -b | awk '{print $5}')"
+        PR_BATTERY="B:${BATTPRCNT}%% "
+        if [[ -n $BATTTIME ]]; then
+            PR_BATTERY+="(${BATTTIME}) "
+        fi
+        if [[ "$(acpi -b | awk '{print $3}' | cut -d, -f1)" == "Charging" ]]; then
+            PR_BATTERY="${green}${PR_BATTERY}"
+        elif [[ "${BATTPRCNT}" -lt 15 ]]; then
+            PR_BATTERY="${r_red}${PR_BATTERY}"
         elif [[ "${BATTPRCNT}" -lt 50 ]]; then
-            PR_BATTERY="${PR_BOLD_YELLOW}${PR_BATTERY}"
+            PR_BATTERY="${b_yellow}${PR_BATTERY}"
         elif [[ "${BATTPRCNT}" -lt 100 ]]; then
             PR_BATTERY="${PR_BATTERY}"
         else
             PR_BATTERY=""
         fi
-        infoline+=( $PR_BATTERY )
+        infoline+=( "${PR_BATTERY}${reset}" )
     fi
+
+    # show disk space
+    space=$(command df -h -P ./ | grep -v Filesystem)
+    infoline+=( "D:$(echo $space | awk '{print $5}')% ($(echo $space | awk '{print $4}')/$(echo $space | awk '{print $2}')) " )
 
     # Username & host
     infoline+=( "${green}%n" )
@@ -118,8 +127,24 @@ function set_prompt() {
     filler="${gray}${(l:$(( $COLUMNS - $i_width ))::.:)}${reset}"
     infoline[2]=( "${infoline[2]} ${filler} " )
 
+    local -a mpcline
+    if which mpc &> /dev/null; then
+        if [[ $(mpc 2>/dev/null | wc -l) > 1 ]]; then
+            mpcline+=$(mpc | head -n1)
+            mpcline+=$(mpc | head -n2 | tail -n1)
+
+            i_width=${(S)mpcline//\%\{*\%\}} # search-and-replace color escapes
+            i_width=${#${(%)i_width}} # expand all escapes and count the chars
+
+            filler="${gray}${(l:$(( $COLUMNS - $i_width -5 )):: :)}${reset}"
+            mpcline[1]=( "${mpcline[1]} ${filler} " )
+        fi
+    fi
+
+
     ### Now, assemble all prompt lines
     lines+=( ${(j::)infoline} )
+    [[ -n ${mpcline} ]] && lines+=( "${reset}${mpcline}${reset}" )
     [[ -n ${vcs_info_msg_0_} ]] && lines+=( "${gray}${vcs_info_msg_0_}${reset}" )
     lines+=( "%(1j.${gray}%j${reset} .)%(0?.${white}.${red})%#${reset} " )
 
