@@ -55,14 +55,14 @@ rescue LoadError => err
 end
 
 begin
-  require 'looksee/shortcuts'
+  require 'looksee'
   module Kernel
     alias_method :orig_methods, :methods
 
     def methods(*args)
       # puts caller.first
       if caller.first =~ /\(irb\):\d+(:in `irb_binding')?/
-        lp(self, *args)
+        self.ls(*args)
       else
         orig_methods
       end
