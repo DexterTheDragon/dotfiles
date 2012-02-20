@@ -16,7 +16,7 @@ defflow off             # disables (in theory) flow control ('cause it's no long
 bind s
 vbell off               # visual bells suck
 defutf8 on              # Default to utf
-escape ^Ss              # Change the escape key to C-s so I can use C-a in vim
+# escape ^Ss              # Change the escape key to C-s so I can use C-a in vim
 altscreen on            # Redraw the screen after exiting fullscreen apps like vim
 
 #                           SCROLL-BACK MODE
@@ -80,5 +80,8 @@ hardstatus alwayslastline "%{wk}%?%-Lw%?%{=b kR}[%{W}%n%f %t%?(%u)%?%{=b kR}]%{=
 # attrcolor b ".I"
 # tell screen how to set colors. AB=background, AF=foreground
 # termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# termcapinfo xterm-color      "Co#256:AB=E[48;5;%dm:AF=E[38;5;%dm"
+# termcapinfo xterm-256color "Co#256:AB=E[48;5;%dm:AF=E[38;5;%dm"
+# term xterm-256color
 # erase background with current bg color
 # defbce "on"
