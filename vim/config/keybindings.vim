@@ -61,6 +61,7 @@ map <leader>e :py EvaluateCurrentRange()
 
 map <leader>b :ls<CR>:b<Space>
 
+noremap <Leader>a :Ack <cword><CR>
 " }}}
 
 " SVN Diffs
