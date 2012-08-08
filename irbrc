@@ -114,12 +114,12 @@ if ENV.include?('RAILS_ENV') || defined?(Rails)
   # end
 
   require 'logger'
-  if defined?(Rails) && Rails.respond_to?(:logger=)
-    Rails.logger = Logger.new(STDOUT)
-    ActiveRecord::Base.logger = Rails.logger
-  else
-    Object.const_set(:RAILS_DEFAULT_LOGGER, Logger.new(STDOUT))
-  end
+  # if defined?(Rails) && Rails.respond_to?(:logger=)
+    # Rails.logger = Logger.new(STDOUT)
+    # ActiveRecord::Base.logger = Rails.logger
+  # else
+    # Object.const_set(:RAILS_DEFAULT_LOGGER, Logger.new(STDOUT))
+  # end
 
   def loud_logger
     set_logger_to Logger.new(STDOUT)
@@ -130,8 +130,14 @@ if ENV.include?('RAILS_ENV') || defined?(Rails)
   end
 
   def set_logger_to(logger)
-    ActiveRecord::Base.logger = logger
-    ActiveRecord::Base.clear_active_connections!
+    if defined?(Rails) && Rails.respond_to?(:logger=)
+      Rails.logger = logger
+      ActiveRecord::Base.logger = Rails.logger
+      ActiveRecord::Base.clear_active_connections!
+    else
+      Object.const_set(:RAILS_DEFAULT_LOGGER, logger)
+    end
+    # ActiveRecord::Base.logger = logger
   end
 
 end
