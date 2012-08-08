@@ -1380,7 +1380,7 @@ class Cache
           $stderr.puts "Skipping duplicate: #{link.url}" if @opt.verbose
           next
         end
-        $stderr.puts "Fetching: #{link.url}" if @opt.verbose
+        $stderr.puts "Fetching: #{link.url}"
         dochistory << link.url
         begin
           doc = fetchdoc(link)
@@ -1656,8 +1656,9 @@ class Cache
         end
       rescue Interrupt, SystemExit
         exit 1
-      rescue Exception
+      rescue Exception => e
         $stderr.puts "Error: skipping document because of an internal error"
+        $stderr.puts "Error: #{e.message} #{e.backtrace.first}"
       end
       doc = nil
     end
