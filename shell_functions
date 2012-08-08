@@ -168,3 +168,18 @@ venv_project()
 }
 
 chpwd_functions=( "${chpwd_functions[@]}" venv_project)
+usechef() {
+    if [ ! -d ~/.chef-$1 ]; then
+        echo 'not a valid chef'
+        readlink ~/.chef
+        return 1
+    fi
+    rm ~/.chef
+    ln -s ~/.chef-$1 ~/.chef
+    readlink ~/.chef
+}
+
+change_wallpaper() {
+    curl http://dev.dexterthedragon.com/wallpaper/ > /tmp/.wallpaper1.jpg 2>/dev/null && mv -f /tmp/.wallpaper1.jpg ~/.wallpaper1.jpg
+    curl http://dev.dexterthedragon.com/wallpaper/ > /tmp/.wallpaper2.jpg 2>/dev/null && mv -f /tmp/.wallpaper2.jpg ~/.wallpaper2.jpg
+}
