@@ -21,13 +21,52 @@ Autotest.add_hook(:run_command) do
   $stdout.write "\e[2J\e[H"
 end
 
-module Autotest::KDENotify
-  def self.knotify title, msg
-    system "kdialog --title \'#{title}\' --passivepopup \'#{msg}\' 5"
+# module Autotest::KDENotify
+  # def self.knotify title, msg
+    # system "kdialog --title \'#{title}\' --passivepopup \'#{msg}\' 5"
+  # end
+
+  # Autotest.add_hook :red do |at|
+    # knotify "Tests failed", "#{at.files_to_test.size} tests failed"
+  # end
+# end
+
+module Autotest::Growl
+  AUTOTEST_IMAGE_ROOT = "~/.autotest_images"
+
+  def self.growl title, msg, img, pri=0, sticky=""
+    system "kdialog --title \'#{title}\' --passivepopup \'#{msg.inspect}\' 10"
   end
 
-  Autotest.add_hook :red do |at|
-    knotify "Tests failed", "#{at.files_to_test.size} tests failed"
+  def self.growl_fail(output)
+    growl "FAIL", "#{output}", "#{AUTOTEST_IMAGE_ROOT}/fail.png", 2
+  end
+
+  def self.growl_pass(output)
+    growl "Pass", "#{output}", "#{AUTOTEST_IMAGE_ROOT}/pass.png"
+  end
+
+  Autotest.add_hook :ran_command do |at|
+
+    results = [at.results].flatten.join("\n")
+
+    if results.include? 'tests'
+      output = results.slice(/(\d+)\s+tests?,\s*(\d+)\s+assertions?,\s*(\d+)\s+failures?(,\s*(\d+)\s+errors)?/)
+      if output
+        $~[3].to_i + $~[5].to_i > 0 ? growl_fail(output) : growl_pass(output)
+      end
+    else
+      output = results.slice(/(\d+)\s+examples?,\s*(\d+)\s+failures?(,\s*(\d+)\s+not implemented)?/)
+      if output
+        $~[2].to_i > 0 ? growl_fail(output) : growl_pass(output)
+      end
+    end
+  end
+
+  Autotest.add_hook :initialize do |autotest|
+    %w{.git .svn .hg .DS_Store ._* vendor tmp log doc}.each do |exception|
+      autotest.add_exception(exception)
+    end
   end
 end
 
