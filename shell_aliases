@@ -16,7 +16,11 @@ alias lynx='lynx -cfg=$HOME/.lynx.cfg -lss=$HOME/.lynx.lss'
 alias ducks='du -cks * | sort -rn | head -15'
 alias tree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias ps='ps -opid,uid,cpu,time,stat,command'
-alias df='df -h'
+if [ `which pydf > /dev/null` ];then
+    alias df='pydf'
+else
+    alias df='df -h'
+fi
 alias dus='du -sh'
 alias cal='cal -3'
 alias info='info --vi-keys'
