@@ -160,6 +160,9 @@ function set_rprompt() {
     if [ $rvm ]; then
         infoline+=( "rvm:$rvm" )
     fi
+    if [ -n "$RBFU_RUBY_VERSION" ]; then
+        infoline+=( "rbfu:$RBFU_RUBY_VERSION" )
+    fi
     if [[ -n $VIRTUAL_ENV ]]; then
         infoline+=( " venv:$(basename $VIRTUAL_ENV)" )
     fi

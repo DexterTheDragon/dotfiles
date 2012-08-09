@@ -158,8 +158,5 @@ fi
 
 # }}}
 # EOF
-# rvm installer added line:
-if [ -s ~/.rvm/scripts/rvm ] ; then source ~/.rvm/scripts/rvm ; fi
+eval "$(rbfu --init --auto)"
 if [ -s /usr/local/bin/virtualenvwrapper.sh ] ; then source /usr/local/bin/virtualenvwrapper.sh ; fi
-fpath=(~/.rvm/scripts/zsh/Completion/ $fpath)
-fpath=(~/.zsh/Completion $fpath)
