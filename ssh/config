@@ -9,8 +9,9 @@ ForwardX11Trusted yes
 HashKnownHosts no
 
 Host *
-    # ControlMaster auto
-    # ControlPath ~/.ssh/master-%r@%h:%p
+    ControlMaster auto
+    ControlPersist 4h
+    ControlPath ~/.ssh/master-%r@%h:%p
     ServerAliveInterval 300
     TCPKeepAlive yes
 
@@ -18,15 +19,11 @@ Host *
 # Host-specific settings
 # #############################################################################
 
-Host divergentlogic
-    Hostname office.divergentlogic.com
-    Port 2222
-    DynamicForward 9050
-    ForwardX11 yes
-    ForwardX11Trusted yes
-
 Host dexterthedragon deathstar
     Hostname dexterthedragon.com
 
 Host starforge
     Hostname 192.168.5.140
+
+Host xbmclive
+    Hostname 192.168.5.128

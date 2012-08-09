@@ -43,6 +43,8 @@ alias cap='cap -p'
 alias mv='mv -i'
 alias jobs='jobs -l'
 
+alias ssh-masters='ls -1 ~/.ssh/master-*'
+
 # Python development helpers {{{
 alias pyhttp='python -m SimpleHTTPServer'
 alias pysmtp='python -m smtpd -n -c DebuggingServer localhost:1025'
