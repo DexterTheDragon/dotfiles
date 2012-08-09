@@ -1,4 +1,4 @@
-# vim:ft=zsh
+# vim:ft=sh
 # list contents right after changing directories
 my_cd() {
     if [ "$1" ]
@@ -8,6 +8,11 @@ my_cd() {
 }
 
 alias cd=my_cd
+
+mkcd() {
+    mkdir -p $1
+    cd $1
+}
 
 # ..(), ...() for quickly changing $CWD {{{1
 # http://www.shell-fu.org/lister.php?id=769
@@ -42,6 +47,13 @@ function ... (){
 }
 # }}}
 
+imagefixer () {
+    for i in "$@"
+    do
+        convert "${i}" -auto-orient "${i}"
+    done
+}
+
 spell() {
     echo $1 | aspell -a
 }
@@ -60,13 +72,6 @@ sa() {
     else
         $SSHADD $@
     fi
-}
-
-llaon() {
-    alias ll='ls -lA'
-}
-llaoff() {
-    alias ll='ls -l'
 }
 
 # Output total memory currently in use by you {{{1
@@ -98,7 +103,7 @@ svn() {
         #colorize the diff
         #remove stupid ^M dos line endings
         #page it if there's more one screen
-        command svn diff "$@" | colordiff | sed -e 's/\r//g' | less -RF
+        command svn diff "$@" | colordiff | sed -e 's/\r//g' | less -RFSX
 
     #page some stuff I often end up paging manually
     elif [[ $sub_cmd =~ ^(status|log|blame|help)$ ]]; then

@@ -8,7 +8,7 @@ alias vim='vim -p'
 
 alias o='xdg-open'
 
-alias wget='wget -c'
+alias wget='wget -c --content-disposition'
 
 alias less='less -imJMW'
 alias locate='locate -i'
