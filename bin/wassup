@@ -9,6 +9,7 @@ UPTIME=`uptime`
 D_UP=${UPTIME:1}
 MYGROUPS=`groups`
 DATE=`date`
+CPU=`grep 'model name' /proc/cpuinfo | cut -d: -f2 | sort -u`
 KERNEL=`uname -a`
 CPWD=`pwd`
 ME=`whoami`
