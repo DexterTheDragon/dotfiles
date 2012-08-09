@@ -12,7 +12,10 @@
 .DS_Store
 .svn
 *.pyc
+*.swp
 
 .rake_tasks
 .cap_tasks
 .passenger_port
+.ruby-version
+.rbfu-version

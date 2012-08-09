@@ -12,9 +12,11 @@
     excludesfile = ~/.gitexcludes
     pager = less -FRSX
 [diff "exif"]
-	textconv = exiftool
+    textconv = exiftool
 [merge]
     tool = vimdiff
+[pager]
+    status = true
 [push]
     default = tracking
 [user]
@@ -23,3 +25,7 @@
 
 [url "ca.utio.us:/git/divergentlogic/"]
     insteadOf = dl://
+[browser "gitscm"]
+    cmd = /bin/sh -c 'firefox http://git-scm.com/docs/$(basename $1 .html)' --
+[help]
+    browser = gitscm
