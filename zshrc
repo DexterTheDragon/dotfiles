@@ -15,8 +15,9 @@ setopt                          \
         extended_glob           \
         hist_ignore_all_dups    \
         hist_ignore_space       \
+        hist_verify             \
         share_history           \
-        no_flow_control         \
+        noflowcontrol         \
         list_types              \
         mark_dirs               \
         path_dirs               \
@@ -50,8 +51,13 @@ fi
 # }}}
 # {{{ completions
 
+fpath=(~/.rvm/scripts/zsh/Completion/ $fpath)
+fpath=(~/.zsh/Completion $fpath)
+
+
 autoload -U compinit
-compinit -C
+compinit
+# compinit -C
 zstyle ':completion:*' list-colors "$LS_COLORS"
 zstyle -e ':completion:*:(ssh|sssh|scp|sshfs|ping|telnet|ftp|rsync):*' hosts 'reply=(${=${${(M)${(f)"$(<~/.ssh/config)"}:#Host*}#Host }:#*\**})'
 zstyle ':completion:*:*:git:*' user-commands ${${(M)${(k)commands}:#git-*}/git-/}
@@ -59,7 +65,6 @@ zstyle ':completion:*:*:git:*' user-commands ${${(M)${(k)commands}:#git-*}/git-/
 source ~/.rake_completion.zsh
 source ~/.zsh_functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.pip_completion.zsh
-# source ~/.rvm/scripts/zsh/Completion/_rvm
 
 # }}}
 # {{{ prompt and theme

@@ -101,7 +101,7 @@ function set_prompt() {
         if [[ "$(acpi -b | awk '{print $3}' | cut -d, -f1)" == "Charging" ]]; then
             PR_BATTERY="${green}${PR_BATTERY}"
         elif [[ "${BATTPRCNT}" -lt 15 ]]; then
-            PR_BATTERY="${r_red}${PR_BATTERY}"
+            PR_BATTERY="${b_red}${PR_BATTERY}"
         elif [[ "${BATTPRCNT}" -lt 50 ]]; then
             PR_BATTERY="${b_yellow}${PR_BATTERY}"
         elif [[ "${BATTPRCNT}" -lt 100 ]]; then
