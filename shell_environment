@@ -1,14 +1,16 @@
 # vim:ft=zsh
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-    export TERM='xterm-256color'
-else
-    export TERM='xterm-color'
+case "$TERM" in
+*256color)
+    # this is what we want
+    ;;
+*)
     echo 'WARNING: 256 color support is not enabled'
-fi
+    ;;
+esac
 
 # umask 027
 
-export PATH=~/.bin/:/opt/komodo/:~/dev/cakephp/cake/console/:/var/lib/gems/1.8/bin/:$PATH
+export PATH=~/.bin/:/opt/vagrant/bin/:$PATH
 # CDPATH=$CDPATH::$HOME:/usr/local
 
 # PYTHONPATH=$HOME/lib/python/site-packages:$HOME/src:$PYTHONPATH
