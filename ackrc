@@ -1,6 +1,8 @@
 # Always sort the files
 --sort-files
 
+--pager=less -FRSX
+
 # Always color, even if piping to a another program
 # --color
 
@@ -13,5 +15,10 @@ cucumber=.feature
 --type-add
 cucumber=.scenario
 
+--type-set
+puppet=.pp
+
 --type-add
 php=.ctp
+
+--ignore-dir=coverage
