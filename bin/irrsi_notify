@@ -5,6 +5,7 @@ ssh $* ": > .irssi/fnotify ; tail -f .irssi/fnotify " | while read heading messa
         if [ -f ~/.receive.wav ]; then
             aplay -q ~/.receive.wav &
         fi
+        message=$(echo "$message" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g")
         /usr/bin/kdialog --title "${heading}" --passivepopup "${message}" 5;
     fi
 done
