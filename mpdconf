@@ -1,4 +1,4 @@
-music_directory "~/podcasts"
+music_directory "~/music"
 playlist_directory "~/.mpd/playlists"
 db_file "~/.mpd/database"
 log_file "~/.mpd/mpd.log"
