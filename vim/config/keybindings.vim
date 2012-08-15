@@ -64,6 +64,9 @@ map <leader>b :ls<CR>:b<Space>
 noremap <Leader>a :Ack <cword><CR>
 " }}}
 
+noremap !s :!rspec % -l <C-r>=line('.')<CR><CR>
+noremap !S :!rspec % <CR>
+
 " SVN Diffs
 " Small, fast, windowed svn diff
 noremap <silent> ,sq :new +:read\ !svn\ diff\ #<CR>:exe Scratch()<CR>:set filetype=diff<CR>:set nofoldenable<CR>
