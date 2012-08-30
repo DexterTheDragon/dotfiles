@@ -8,4 +8,5 @@ let NERDSpaceDelims=1
 " Don't nest comments
 let NERDDefaultNesting=0
 
-map <leader>/ ,c<space>
+let NERDCreateDefaultMappings=0
+map <leader>/ <Plug>NERDCommenterToggle

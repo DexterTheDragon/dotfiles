@@ -1,3 +1,8 @@
+" syntax settings
+let python_highlight_all=1
+let python_slow_sync=1
+let python_print_as_function=1
+
 python << EOF
 import os
 import sys
@@ -14,3 +19,4 @@ import vim
 def EvaluateCurrentRange():
     eval(compile('\n'.join(vim.current.range),'','exec'),globals())
 EOL
+map <leader>e :py EvaluateCurrentRange()

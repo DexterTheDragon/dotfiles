@@ -2,8 +2,13 @@
 set nocompatible                "cp:    turns off strct vi compatibility
 
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" call pathogen#runtime_append_all_bundles()
+" call pathogen#helptags()
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+source $HOME/.vim/vundle.vim
+
 filetype plugin indent on
 
 " load everything else in its own config file

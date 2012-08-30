@@ -84,4 +84,5 @@ nmap <silent> <F9>
 " Set tag filename(s)
 set tags=./tags,tags
 
+set keywordprg=php_doc
 " vim: set fdm=marker:
