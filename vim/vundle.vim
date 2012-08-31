@@ -67,6 +67,7 @@ Bundle 'fs111/pydoc.vim'
 Bundle 'django.vim'
 Bundle 'python.vim--Vasiliev'
 Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'pyfold'
 
 " Puppet
 Bundle 'rodjek/vim-puppet'

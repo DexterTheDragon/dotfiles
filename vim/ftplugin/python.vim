@@ -3,6 +3,8 @@ let python_highlight_all=1
 let python_slow_sync=1
 let python_print_as_function=1
 
+setlocal foldmethod=expr
+
 python << EOF
 import os
 import sys
