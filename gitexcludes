@@ -19,3 +19,5 @@
 .passenger_port
 .ruby-version
 .rbfu-version
+tags
+cscope.*
