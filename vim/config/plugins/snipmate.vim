@@ -1,1 +1,1 @@
-let snippets_dir="~/.vim/bundle/snipmate.vim/snippets/,~/.vim/mysnippets"
+let snippets_dir="~/.vim/snippets,~/.vim/mysnippets"
