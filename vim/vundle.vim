@@ -68,7 +68,8 @@ Bundle 'django.vim'
 Bundle 'python.vim--Vasiliev'
 Bundle 'michaeljsmith/vim-indent-object'
 
-
+" Puppet
+Bundle 'rodjek/vim-puppet'
 
   " # 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
 
