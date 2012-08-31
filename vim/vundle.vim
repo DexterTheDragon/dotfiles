@@ -38,6 +38,13 @@ Bundle 'bogado/file-line'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-speeddating'
+" 'restore_view.vim'
+" reinh/vim-makegreen
+" klen/python-mode
+" briangershon/html5.vim
+Bundle 'AutoComplPop'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'kien/ctrlp.vim'
 
 " syntax files
 Bundle 'tpope/vim-git'
@@ -58,6 +65,9 @@ Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
 Bundle 'mileszs/apidock.vim'
 " Bundle 'vim-scripts/ri-browser'
+" 'astashov/vim-ruby-debugger'
+" 'vim-ruby/vim-ruby'
+" tpope/vim-rake
 
 " PHP
 Bundle 'vim-scripts/php.vim--Hodge'
@@ -72,15 +82,11 @@ Bundle 'pyfold'
 " Puppet
 Bundle 'rodjek/vim-puppet'
 
-  " # 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
+" 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
 
 
-  " # 'astashov/vim-ruby-debugger'
-  " # 'timcharper/textile.vim'
-  " # 'tpope/vim-markdown'
-  " # 'tpope/vim-vividchalk'
-  " # 'tsaleh/vim-shoulda'
-  " # 'vim-ruby/vim-ruby'
-  " # 'vim-scripts/a.vim'
-  " tpope/vim-rake
+" 'timcharper/textile.vim'
+" 'tpope/vim-markdown'
+" 'tsaleh/vim-shoulda'
+" 'vim-scripts/a.vim'
 Bundle 'vim-scripts/RunView'
