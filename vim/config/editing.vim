@@ -1,3 +1,5 @@
+set undofile
+set undodir=~/.vim/undodir
 set showmatch                   " Flashes matching brackets or parentheses
 set nobackup                    " Does not write a persistent backup file of an edited file
 set writebackup                 " Does keep a backup file while editing a file
