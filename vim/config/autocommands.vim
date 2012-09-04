@@ -42,3 +42,5 @@ au FileType java compiler javac
 let g:html_use_xhtml=1
 
 set diffopt=filler,iwhite,vertical
+
+autocmd VimLeave * :VimuxCloseRunner
