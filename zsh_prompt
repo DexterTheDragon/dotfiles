@@ -130,7 +130,7 @@ function set_prompt() {
     local -a mpcline
     if which mpc &> /dev/null; then
         if [[ $(mpc 2>/dev/null | wc -l) > 1 ]]; then
-            mpcline+=$(mpc | head -n1)
+            mpcline+=$(mpc current -f '[[%artist% - ]%title%]|[%name%]|[%file%]')
             mpcline+=$(mpc | head -n2 | tail -n1)
 
             i_width=${(S)mpcline//\%\{*\%\}} # search-and-replace color escapes
