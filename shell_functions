@@ -1,4 +1,4 @@
-# vim:ft=sh
+# vim:ft=zsh
 # list contents right after changing directories
 my_cd() {
     if [ "$1" ]
@@ -116,7 +116,18 @@ svn() {
 }
 
 reloaddb() {
-    mysqladmin -f drop $1 && mysqladmin create $1 && zcat $2 | mysql $1
+    mysql=$(mysqlshow $1 >/dev/null 2>&1)$?
+    pgsql=$(psql --list $1 >/dev/null 2>&1)$?
+    if [ $mysql -eq 0 ]; then
+        echo "Reloading mysql database $1";
+        mysqladmin -f drop $1 && mysqladmin create $1 && zcat $2 | mysql $1;
+    elif [ $pgsql -eq 0 ]; then
+        echo "Reloading postgres database $1";
+        dropdb $1 && createdb $1 && pg_restore --verbose --clean --no-acl --no-owner -d $1 $2;
+    else
+        echo "Unable to find db in mysql or postgres";
+        return 1;
+    fi
 }
 
 # modified from rvm
