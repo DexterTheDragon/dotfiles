@@ -8,4 +8,4 @@ if [ ! -d "$MANDIR" ]; then
 fi
 
 FUNCTION=`echo $1 | sed 's/_/-/g'`
-links -dump file://$MANDIR/function.$FUNCTION.html
+links -dump file://$MANDIR/function.$FUNCTION.html | less
