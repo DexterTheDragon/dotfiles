@@ -40,3 +40,25 @@ _cap () {
 }
 
 compdef _cap cap
+
+
+_thor_does_task_list_need_generating () {
+  if [ ! -f .thor_tasks ]; then return 0;
+  else
+    accurate=$(stat -c%m .thor_tasks)
+    changed=$(stat -c%m lib/tasks/*.thor)
+    return $(expr $accurate '>=' $changed)
+  fi
+}
+
+_thor () {
+  if [ -f lib/tasks/*.thor ]; then
+    if _thor_does_task_list_need_generating; then
+      echo "\nGenerating .thor_tasks..." > /dev/stderr
+      thor list | grep thor | cut -d " " -f 2 > .thor_tasks
+    fi
+    compadd `cat .thor_tasks`
+  fi
+}
+
+compdef _thor thor
