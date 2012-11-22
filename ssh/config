@@ -28,17 +28,6 @@ Host starforge
 Host xbmclive
     Hostname 192.168.5.128
 
-Host work
-    HostName internal.franklinestimating.com
-    Port 2214
-    LocalForward 43333 127.0.0.1:3333
-    LocalForward 43000 127.0.0.1:3000
-    LocalForward 48080 127.0.0.1:8080
-# darkknight as git
-Host dk-g
-    HostName darkknight.franklinestimating.com
-    Port 2218
-    User git
 # darkknight as franklin
 Host dk-f
     HostName darkknight.franklinestimating.com
