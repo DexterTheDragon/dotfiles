@@ -64,6 +64,8 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
 Bundle 'mileszs/apidock.vim'
+Bundle 'danchoi/ruby_bashrockets.vim'
+" Bundle 'vim-scripts/yaml.vim'
 " Bundle 'vim-scripts/ri-browser'
 " 'astashov/vim-ruby-debugger'
 " 'vim-ruby/vim-ruby'
@@ -71,6 +73,7 @@ Bundle 'mileszs/apidock.vim'
 
 " PHP
 Bundle 'vim-scripts/php.vim--Hodge'
+" Bundle 'klokane/vim-phpunit'
 
 " Python
 Bundle 'fs111/pydoc.vim'
@@ -83,8 +86,10 @@ Bundle 'pyfold'
 Bundle 'rodjek/vim-puppet'
 
 " 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
+" Bundle 'bronson/vim-trailing-whitespace'
 
 
+" `Bundle 'Rykka/colorv.vim'`
 " 'timcharper/textile.vim'
 " 'tpope/vim-markdown'
 " 'tsaleh/vim-shoulda'
