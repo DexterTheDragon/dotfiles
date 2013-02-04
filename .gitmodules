@@ -7,3 +7,6 @@
 [submodule "vim/snippets"]
 	path = vim/snippets
 	url = git://github.com/scrooloose/snipmate-snippets.git
+[submodule "tmux-powerline"]
+	path = tmux-powerline
+	url = git://github.com/erikw/tmux-powerline.git
