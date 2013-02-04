@@ -10,6 +10,7 @@ alias o='xdg-open'
 
 alias wget='wget -c --content-disposition'
 
+alias wtf='tail -f /var/log/{dmesg,messages,*{,/*}{log,err}}'
 alias less='less -imJMW'
 alias locate='locate -i'
 alias lynx='lynx -cfg=$HOME/.lynx.cfg -lss=$HOME/.lynx.lss'
