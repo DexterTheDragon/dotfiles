@@ -1446,14 +1446,14 @@ class Cache
             content = OpenStruct.new
             XPath.each(e2,"parent::/title/text()") do |node|
               content.title = ""
-              node.value.each() do |e3| #remove line breaks
+              node.value.each_line() do |e3| #remove line breaks
                 content.title+= e3.chomp+" "
               end
               content.title.strip!
             end
             XPath.each(e2,"parent::/created/text()") do |node|
               pub_date = ""
-              node.value.each() do |e3| #remove line breaks
+              node.value.each_line() do |e3| #remove line breaks
                 pub_date+= e3.chomp+" "
               end
               begin
@@ -1496,7 +1496,7 @@ class Cache
           #title
           node = XPath.first(doc.dom,"/feed/title/text()")
           feed_title = ""
-          node.value.each() do |e3| #remove line breaks
+          node.value.each_line() do |e3| #remove line breaks
             feed_title += e3.chomp+" "
           end
           feed_title.strip!
@@ -1512,7 +1512,7 @@ class Cache
               title = ''
               XPath.each(e1,"title/text()") do |node|
                 title = ''
-                node.value.each() do |e3| #remove line breaks
+                node.value.each_line() do |e3| #remove line breaks
                   title+= e3.chomp+" "
                 end
                 title.strip!
@@ -1520,7 +1520,7 @@ class Cache
               pub_date = nil
               XPath.each(e1,"pubDate/text()") do |node|
                 pub_date = ""
-                node.value.each() do |e3| #remove line breaks
+                node.value.each_line() do |e3| #remove line breaks
                   pub_date+= e3.chomp+" "
                 end
                 begin
@@ -1623,7 +1623,7 @@ class Cache
           #title
           node = XPath.first(doc.dom,"//channel/title/text()")
           feed_title = ""
-          node.value.each() do |e3| #remove line breaks
+          node.value.each_line() do |e3| #remove line breaks
             feed_title += e3.chomp+" "
           end
           feed_title.strip!
@@ -2299,7 +2299,7 @@ class Query
               $stderr.puts "Found: #{title} (relevance: #{path.relevance})" if @opt.verbose
               if title
                 path.title = ""
-                title.value.each() do |e3| #remove line breaks
+                title.value.each_line() do |e3| #remove line breaks
                   path.title+= e3.chomp+" "
                 end
                 path.title.strip!
@@ -2332,7 +2332,7 @@ class Query
               $stderr.puts "Found: #{title} (relevance: #{path.relevance})" if @opt.verbose
               if title
                 path.title = ""
-                title.value.each() do |e3| #remove line breaks
+                title.value.each_line() do |e3| #remove line breaks
                   path.title+= e3.chomp+" "
                 end
                 path.title.strip!
