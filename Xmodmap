@@ -5,3 +5,4 @@ keysym Caps_Lock = Control_L
 keysym Control_L = Escape
 add Lock = Caps_Lock
 add Control = Control_L
+keycode 108 = Alt_R
