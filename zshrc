@@ -45,8 +45,8 @@ if [ -f ~/.shell_functions ]; then
     . ~/.shell_functions
 fi
 
-if [ -f ~/.dir_colors ]; then
-    eval `dircolors ~/.dir_colors`
+if [ -f ~/.vendor/dircolors-solarized/dircolors.256dark ]; then
+    eval `dircolors ~/.vendor/dircolors-solarized/dircolors.256dark`
 fi
 # }}}
 # {{{ completions
