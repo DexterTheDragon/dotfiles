@@ -13,3 +13,6 @@
 [submodule "vendor/tmux-colors-solarized"]
 	path = vendor/tmux-colors-solarized
 	url = git://github.com/seebi/tmux-colors-solarized.git
+[submodule "vendor/dircolors-solarized"]
+	path = vendor/dircolors-solarized
+	url = git://github.com/seebi/dircolors-solarized.git
