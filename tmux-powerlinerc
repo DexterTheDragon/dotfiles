@@ -80,11 +80,11 @@ export TMUX_POWERLINE_SEG_MAILCOUNT_MBOX_INBOX=""
 
 # now_playing.sh {
 # Music player to use. Can be any of {audacious, banshee, cmus, itunes, lastfm, mocp, mpd, mpd_simple, rdio, rhythmbox, spotify, spotify_wine}.
-export TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER=""
+export TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER="mpd_simple"
 # Maximum output length.
 export TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN="40"
 # How to handle too long strings. Can be {trim, roll}.
-export TMUX_POWERLINE_SEG_NOW_PLAYING_TRIM_METHOD="trim"
+export TMUX_POWERLINE_SEG_NOW_PLAYING_TRIM_METHOD="roll"
 # Charcters per second to roll if rolling trim method is used.
 export TMUX_POWERLINE_SEG_NOW_PLAYING_ROLL_SPEED="2"
 
@@ -92,6 +92,8 @@ export TMUX_POWERLINE_SEG_NOW_PLAYING_ROLL_SPEED="2"
 export TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_HOST="localhost"
 # Port the MPD server is running on.
 export TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_PORT="6600"
+# Song display format for mpd_simple. See `man mpc` for delimiters.
+export TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_SIMPLE_FORMAT="[[%artist% - ]%title%]|[%name%]|[%file%]"
 
 # Username for Last.fm if that music player is used.
 export TMUX_POWERLINE_SEG_NOW_PLAYING_LASTFM_USERNAME=""
