@@ -1,0 +1,19 @@
+# ~/.tmuxinator/<%= @name %>.yml
+# you can make as many tabs as you wish...
+
+project_name: <%= @name %>
+project_root: ~/dev/<%= @name %>
+pre: vagrant up
+tabs:
+  - editor:
+      layout: main-vertical
+      panes:
+        - git fetch
+        - #empty, will just run plain bash
+        - #empty
+  - server: rails s
+  - console: rails c
+  - database: rails db -p
+  - logs: tail -f log/development.log
+  - capistrano:
+  - server: ssh me@myhost
