@@ -23,3 +23,4 @@ php=.ctp
 
 --ignore-dir=coverage
 --ignore-dir=doc
+--ignore-dir=tmp
