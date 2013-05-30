@@ -7,8 +7,6 @@ pre:
   - vagrant up
 tabs:
   - editor:
-    - yard server -G -d
-    - firefox http://0.0.0.0:8808/
     - firefox http://franklinanywhere.dev:3000/
     - git fetch
   - server:
@@ -18,5 +16,10 @@ tabs:
         - rails c
   - database: rails db -p
   - logs: tail -f log/development.log
+  - rdoc: gem rdoc --all && exit
+  - yard:
+    - yard server -G -d
+    - firefox http://0.0.0.0:8808/
+    - exit
   # - capistrano:
   # - server: ssh me@myhost

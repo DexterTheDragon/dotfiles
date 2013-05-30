@@ -1,0 +1,16 @@
+# ~/.tmuxinator/wallpaper.yml
+# you can make as many tabs as you wish...
+
+project_name: wallpaper
+project_root: ~/dev/wallpaper
+pre: vagrant up
+tabs:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim
+        - composer install
+        - #empty
+  - shell: firefox http://192.168.33.10:8000
+  - database: sqlite3 db/wallpapers.db
+  - server: vagrant ssh

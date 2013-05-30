@@ -1,0 +1,13 @@
+# ~/.tmuxinator/dragon-video.yml
+# you can make as many tabs as you wish...
+
+project_name: dragon-video
+project_root: ~/dev/dragon-video
+tabs:
+  - editor:
+  - server:
+        - cd ~/dev/vagrant-wordpress
+        - vagrant up
+        - vagrant ssh
+  - wordpress-tests: cd ~/dev/wordpress-tests
+  - phpunit: cd ~/dev/phpunit
