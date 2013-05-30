@@ -163,5 +163,6 @@ fi
 
 # }}}
 # EOF
-eval "$(rbfu --init --auto)"
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
 if [ -s /usr/local/bin/virtualenvwrapper.sh ] ; then source /usr/local/bin/virtualenvwrapper.sh ; fi

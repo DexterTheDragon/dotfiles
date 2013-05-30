@@ -205,6 +205,9 @@ function set_rprompt() {
     if [ $rvm ]; then
         infoline+=( "rvm:$rvm" )
     fi
+    if [ -n "$RUBY_ROOT" ]; then
+        infoline+=( "chruby:$(basename $RUBY_ROOT)" )
+    fi
     if [ -n "$RBFU_RUBY_VERSION" ]; then
         infoline+=( "rbfu:$RBFU_RUBY_VERSION" )
     fi
