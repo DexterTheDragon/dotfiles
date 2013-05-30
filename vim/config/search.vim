@@ -7,5 +7,3 @@ set smartcase                   "scs:   ignores ignorecase when pattern contains
 nmap <silent> <leader>h :silent noh<CR>
 " Display the number of matches for the last search
 nmap <leader># :%s:<C-R>/::gn<cr>
-" Restore case-sensitivity for jumping to tags (set ic disables it)
-map <silent> <C-]> :set noic<cr>g<C-]><silent>:set ic<cr>
