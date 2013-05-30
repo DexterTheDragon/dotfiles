@@ -6,6 +6,8 @@ alias l='ls -CF'
 alias vi='vim'
 alias vim='vim -p'
 
+alias v='vagrant'
+
 alias o='xdg-open'
 
 alias wget='wget -c --content-disposition'
@@ -46,9 +48,15 @@ alias jobs='jobs -l'
 
 alias ssh-masters='ls -1 ~/.ssh/master-*'
 
+alias stardate='echo $(expr $(date +%Y) - 1900)$(date +%m.%d) or $(date +%Y.%-j)'
+
 # Python development helpers {{{
-alias pyhttp='python -m SimpleHTTPServer'
 alias pysmtp='python -m smtpd -n -c DebuggingServer localhost:1025'
+function server() {
+    local port="${1:-8000}"
+    sleep 1 && firefox "http://localhost:${port}/" &
+    python -m SimpleHTTPServer $port
+}
 # }}}
 
 # vim:ft=sh
