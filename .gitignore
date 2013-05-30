@@ -10,6 +10,7 @@ rvm/*
 !rvm/user/*
 
 ssh/id_rsa*
+ssh/id_ecdsa*
 ssh/known_hosts
 
 irssi/away.log
