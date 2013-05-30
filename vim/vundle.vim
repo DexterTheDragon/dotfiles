@@ -3,6 +3,7 @@
 Bundle 'gmarik/vundle'
 
 " Vim
+Bundle 'airblade/vim-gitgutter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -22,9 +23,9 @@ Bundle 'SearchComplete'
 Bundle 'searchfold.vim'
 Bundle 'TaskList.vim'
 Bundle 'IndexedSearch'
-Bundle 'Align'
+" Bundle 'Align'
 " TODO: switch align with this?
-" Bundle 'godlygeek/tabular'
+Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-ragtag'
 Bundle 'BufOnly.vim'
@@ -42,7 +43,8 @@ Bundle 'tpope/vim-speeddating'
 " reinh/vim-makegreen
 " klen/python-mode
 " briangershon/html5.vim
-Bundle 'AutoComplPop'
+" Bundle 'AutoComplPop'
+" Bundle 'joonty/vdebug'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'kien/ctrlp.vim'
 
